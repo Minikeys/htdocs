@@ -6,7 +6,7 @@ use Core\Controller\Controller;
 
 use Core\Twig\FlashExtensions;
 use Core\Twig\TemplateExtensions;
-
+use Core\Session\FlashService;
 
 use \App;
 
@@ -32,7 +32,7 @@ class AppController extends Controller
 
         $this->twig->addExtension(new TemplateExtensions());
 
-        $this->twig->addExtension(new FlashExtensions($this->flash));
+       // $this->twig->addExtension(new FlashExtensions($this->flash));
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
 

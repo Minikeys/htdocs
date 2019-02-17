@@ -10,12 +10,13 @@ use Core\HTML\BootstrapForm;
 
 use Core\Session\FlashService;
 
+
 class UsersController extends AppController
 {
 
     public function login(){
 
-        $errors = false;
+        $this->flash = 'erreur';
 
         if(!empty($_POST)){
 
@@ -27,7 +28,7 @@ class UsersController extends AppController
 
             }else{
 
-                FlashService::error('erreur');
+                FlashService::error($this->flash);
 
             }
 
