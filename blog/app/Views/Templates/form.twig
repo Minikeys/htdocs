@@ -1,0 +1,29 @@
+{% macro input(name, label, value = null, options = []) %}
+    <div class="form-group {{ options.class }}">
+        <label for="{{ name }}">{{ label }}</label>
+        <input type="{{ options.type ?: 'text' }}" class="form-control" id="{{ name }}" name="{{ name }}" value="{{ value }}">
+    </div>
+{% endmacro %}
+
+{% macro textarea(name, label, value = null, options = []) %}
+    <div class="form-group {{ options.class }}">
+        <label for="{{ name }}">{{ label }}</label>
+        <textarea type="text" class="form-control" id="{{ name }}" name="{{ name }}">{{ value }}</textarea>
+    </div>
+{% endmacro %}
+
+{% macro select(name, label, value = null, value2 = null, options = []) %}
+    <div class="form-group {{ options.class }}">
+
+        <label for="{{ name }}">{{ label }}</label>
+
+        <select class="form-control" name="{{ name }}">'
+
+            {% for key, val in value %}
+            <option value='{{ key }}' {% if key == value2 %}selected{% endif %}>{{ val }}</option>
+            {% endfor %}
+
+        </select>
+
+    </div>
+{% endmacro %}

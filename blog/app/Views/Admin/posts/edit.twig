@@ -1,0 +1,25 @@
+{% extends '/Templates/default.twig' %}
+
+{% import '/Templates/form.twig' as form %}
+
+{% block title %}
+
+    <title>Editer un article - Mon blog</title>
+
+{% endblock %}
+
+{% block content %}
+
+<form method="post">
+
+    {{ form.input('title', 'Titre de l\'article', variable.form.data.title)}}
+
+    {{ form.select('category_id', 'Catégorie', variable.categories, variable.form.data.category_id)}}
+
+    {{ form.textarea('content', 'Contenu', variable.form.data.content) }}
+
+    <button class="btn btn-primary">Sauvegarder</button>
+
+</form>
+
+{% endblock %}

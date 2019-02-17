@@ -1,0 +1,15 @@
+{
+    "name": "cybercreative/blog",
+    "require": {
+        "twig/twig": "^2.6"
+    },
+    "authors": [
+        {
+            "name": "CyberCreative",
+            "email": "mikael.malvache@mgmail.fr"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^7"
+    }
+}
