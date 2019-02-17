@@ -10,10 +10,10 @@
 
 {% block content %}
 
-    {% if flash('error') %}
+    {% if session.get('error') %}
         <div class="alert alert-danger">
 
-        {{ flash('error') }}
+        {{ session.get('error') }}
 
         </div>
     {% endif %}

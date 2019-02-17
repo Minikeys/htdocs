@@ -28,7 +28,7 @@ class UsersController extends AppController
 
             }else{
 
-                FlashService::error($this->flash);
+                FlashService::error('erreur');
 
             }
 

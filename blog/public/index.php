@@ -8,6 +8,10 @@ require ROOT . '/vendor/autoload.php';
 
 require ROOT . '/core/Twig/TemplateExtensions.php';
 
+require ROOT . '/core/Twig/FlashExtensions.php';
+
+require ROOT . '/core/Session/SessionInterface.php';
+
 App::load();
 
 if(isset($_GET['p'])){
