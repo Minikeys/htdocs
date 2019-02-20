@@ -41,6 +41,8 @@ class AppController extends Controller
 
         $this->twig->addGlobal('current_page', $page);
 
+        $this->twig->addGlobal('session', $_SESSION);
+
         $this->flashmessage = new FlashService();
 
     }

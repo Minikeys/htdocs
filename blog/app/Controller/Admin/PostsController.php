@@ -21,7 +21,6 @@ class PostsController extends AppController
     public function index(){
 
         $posts = $this->Post->all();
-
         $this->render('admin.posts.index', compact('posts'));
 
     }

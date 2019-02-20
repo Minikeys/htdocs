@@ -36,7 +36,23 @@
             </li>
         </ul>
 
-        <button class="btn btn-secondary my-2 my-sm-0" type="submit">Login</button>
+        {% if session.grade == 1 %}
+        <ul class="navbar-nav justify-content-between">
+            <li class="nav-item {{ activeClass('admin.posts.index') }}">
+                <a class="nav-link" href="index.php?p=admin.posts.index">Admin Articles</a>
+            </li>
+            <li class="nav-item {{ activeClass('admin.categories.index') }}">
+                <a class="nav-link" href="index.php?p=admin.categories.index">Admin Catégories</a>
+            </li>
+        </ul>
+        {% endif %}
+
+        {% if not session.auth == null %}
+            <a class="btn btn-secondary" href="index.php?p=users.logout" role="button">Logout</a>
+        {% else %}
+            <a class="btn btn-primary" href="index.php?p=users.login" role="button">Login</a>
+        {% endif %}
+
     </div>
 </nav>
 

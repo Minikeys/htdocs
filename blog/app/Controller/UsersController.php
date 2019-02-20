@@ -35,4 +35,13 @@ class UsersController extends AppController
         $this->render('users.login', compact('form', 'errors'));
     }
 
+    public function logout(){
+
+        session_destroy();
+        $this->flashmessage->success('Vous êtes déconnecté');
+        header('Location: index.php?p=home');
+
+
+    }
+
 }
