@@ -20,6 +20,8 @@ class AppController extends Controller
 
     public $flashmessage;
 
+    public $page;
+
     public function __construct()
     {
 
@@ -34,6 +36,10 @@ class AppController extends Controller
         $this->twig->addExtension(new FlashExtensions());
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
+
+        $page = $_GET['p'];
+
+        $this->twig->addGlobal('current_page', $page);
 
         $this->flashmessage = new FlashService();
 

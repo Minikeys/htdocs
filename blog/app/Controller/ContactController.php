@@ -11,29 +11,26 @@ use Core\HTML\BootstrapForm;
 class ContactController extends AppController
 {
 
-    public function login(){
+    public $page;
 
-        $errors = false;
+    public function __construct()
+    {
+        parent::__construct();
 
-        if(!empty($_POST)){
+        $this->loadModel('Post');
 
-            $auth = new DBAuth(App::getInstance()->getDb());
+        $this->loadModel('Category');
 
-            if($auth->login($_POST['username'], $_POST['password'])){
+    }
 
-                header('Location: index.php?p=admin.posts.index');
+    public function index()
+    {
 
-            }else{
+        $posts = $this->Post->last();
+        $categories = $this->Category->all();
 
-                $errors = true;
+        $this->render('posts.index', compact('posts', 'categories'));
 
-            }
-
-        }
-
-        $form = new BootstrapForm($_POST);
-
-        $this->render('users.login', compact('form', 'errors'));
     }
 
 }
