@@ -33,7 +33,9 @@ class CategoriesController extends AppController
             $result = $this->Category->create(
                 ['title' => $_POST['title']]);
 
-            return $this->index();
+            $this->flashmessage->success('Catégorie ajoutée');
+            header('Location: index.php?p=admin.categories.index');
+            exit();
 
 
         }
@@ -51,7 +53,9 @@ class CategoriesController extends AppController
             $result = $this->Category->update($_GET['id'],
                 ['title' => $_POST['title']]);
 
-            return $this->index();
+            $this->flashmessage->success('Catégorie éditée');
+            header('Location: index.php?p=admin.categories.index');
+            exit();
 
         }
 
@@ -71,7 +75,9 @@ class CategoriesController extends AppController
 
             if ($result){
 
-                return $this->index();
+                $this->flashmessage->success('Catégorie supprimée');
+                header('Location: index.php?p=admin.categories.index');
+                exit();
             }
         }
 

@@ -8,8 +8,6 @@ use Core\Auth\DBAuth;
 
 use Core\HTML\BootstrapForm;
 
-use Core\Session\FlashService;
-
 
 class UsersController extends AppController
 {
@@ -26,8 +24,7 @@ class UsersController extends AppController
 
             }else{
 
-                $message = new FlashService();
-                $message->error('Erreur haha');
+                $this->flashmessage->error('Identifiant ou mot de passe incorrect');
 
             }
 

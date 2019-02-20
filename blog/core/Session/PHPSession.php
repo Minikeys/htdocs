@@ -58,9 +58,9 @@ class PHPSession implements SessionInterface
      * @param $key
      *
      */
-    public function delet($key): void
+    public function delete($key): void
     {
         $this->ensureStarted();
-        unset( $_SESSION[$key]);
+        unset($_SESSION[$key]);
     }
 }

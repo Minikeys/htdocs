@@ -42,13 +42,16 @@ class FlashService
         if(is_null($this->messages)) {
 
             $this->messages = $this->session->get($this->session_key, []);
-            $this->session->delet($this->session_key);
+            $this->session->delete($this->session_key);
+            unset($_SESSION[$this->session_key]);
+
 
         }
 
         if(array_key_exists($type, $this->messages)){
 
             return $this->messages[$type];
+
         }
 
         return null;

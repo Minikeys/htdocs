@@ -30,6 +30,6 @@ interface SessionInterface
      * @param $key
      *
      */
-    public function delet($key): void;
+    public function delete($key): void;
 
 }

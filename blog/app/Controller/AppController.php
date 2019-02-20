@@ -7,6 +7,8 @@ use Core\Controller\Controller;
 use Core\Twig\FlashExtensions;
 use Core\Twig\TemplateExtensions;
 
+use Core\Session\FlashService;
+
 use \App;
 
 class AppController extends Controller
@@ -15,6 +17,8 @@ class AppController extends Controller
     protected $twig;
 
     protected $loader;
+
+    public $flashmessage;
 
     public function __construct()
     {
@@ -30,6 +34,8 @@ class AppController extends Controller
         $this->twig->addExtension(new FlashExtensions());
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
+
+        $this->flashmessage = new FlashService();
 
     }
 
