@@ -16,8 +16,6 @@ class UsersController extends AppController
 
     public function login(){
 
-        $this->flash = 'erreur';
-
         if(!empty($_POST)){
 
             $auth = new DBAuth(App::getInstance()->getDb());
@@ -28,7 +26,8 @@ class UsersController extends AppController
 
             }else{
 
-                FlashService::error('erreur');
+                $message = new FlashService();
+                $message->error('Erreur haha');
 
             }
 

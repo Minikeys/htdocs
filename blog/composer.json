@@ -2,7 +2,8 @@
     "name": "cybercreative/blog",
     "require": {
         "twig/twig": "^2.6",
-        "php-di/php-di": "^6.0"
+        "php-di/php-di": "^6.0",
+        "pagerfanta/pagerfanta": "^2.0"
     },
     "authors": [
         {

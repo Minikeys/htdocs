@@ -15,7 +15,7 @@ class HomeController extends AppController
 
     }
 
-    public function home()
+    public function index()
     {
 
         $posts = $this->Post->last();

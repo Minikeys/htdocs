@@ -132,6 +132,10 @@ class ComposerStaticInitf7a231c10ec6a2d18044633c27033312
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
             ),
+            'Pagerfanta\\' => 
+            array (
+                0 => __DIR__ . '/..' . '/pagerfanta/pagerfanta/src',
+            ),
         ),
     );
 

@@ -13,9 +13,9 @@ class FlashExtensions extends \Twig_Extension
      */
     private $flashService;
 
-    public function __construct(FlashService $flashService)
+    public function __construct()
     {
-        $this->flashService = $flashService;
+        $this->flashService = new FlashService();
     }
 
     public function getFunctions(): array

@@ -27,7 +27,7 @@ class AppController extends Controller
 
         $this->twig->addExtension(new TemplateExtensions());
 
-        $this->twig->addExtension(new FlashExtensions($_SESSION));
+        $this->twig->addExtension(new FlashExtensions());
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
 

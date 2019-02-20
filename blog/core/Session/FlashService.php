@@ -15,10 +15,10 @@ class FlashService
 
     private $messages;
 
-    public function __construct(SessionInterface $session)
+    public function __construct()
     {
 
-        $this->session = $session;
+        $this->session = new PHPSession();
     }
 
     public function success(string $message){
