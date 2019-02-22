@@ -20,9 +20,11 @@
 
 <form method="post">
 
-    {{ form.input('username', 'Votre identifiant', name)}}
+    {{ form.input('username', 'Votre identifiant', name, {require: 'required'})}}
 
-    {{ form.input('password', 'Votre mot de passe', password, {type: 'password'}) }}
+    {{ form.input('password', 'Votre mot de passe', password, {type: 'password', require: 'required'}) }}
+
+    {{ form.input('email', 'Votre email', email, {type: 'email', require: 'required'}) }}
 
     <button class="btn btn-primary">S'enregistrer</button>
 

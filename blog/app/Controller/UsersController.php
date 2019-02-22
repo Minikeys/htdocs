@@ -12,6 +12,15 @@ use Core\HTML\BootstrapForm;
 class UsersController extends AppController
 {
 
+    public function __construct()
+    {
+
+        parent::__construct();
+
+        $this->loadModel('User');
+
+    }
+
     public function login(){
 
         if(!empty($_POST)){
@@ -41,6 +50,30 @@ class UsersController extends AppController
         $this->flashmessage->success('Vous êtes déconnecté');
         header('Location: index.php?p=home');
 
+
+    }
+
+    public function register(){
+
+        if(!empty($_POST)){
+
+            $result = $this->User->create(
+                ['username' => $_POST['username'],
+                    'password' => sha1($_POST['password']),
+                    'email' => $_POST['email']]);
+
+            if ($result){
+
+                $this->flashmessage->success('Compte créé avec succès !');
+                header('Location: index.php?p=home');
+                exit();
+
+            }
+        }
+
+        $form = new BootstrapForm($_POST);
+
+        $this->render('users.register', compact('form', 'errors'));
 
     }
 
