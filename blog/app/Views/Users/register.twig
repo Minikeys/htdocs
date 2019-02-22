@@ -18,16 +18,29 @@
         </div>
     {% endif %}
 
-<form method="post">
+    <form method="post">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form.input('username', 'Votre identifiant', name, {require: 'required'})}}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.input('password', 'Votre mot de passe', password, {type: 'password', require: 'required'}) }}
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+    {{ form.input('firstname', 'Votre Prénom', firstname, {require: 'required'})}}
+            </div>
+            <div class="form-group col-md-6">
+    {{ form.input('lastname', 'Votre Nom', lastname, {require: 'required'})}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.input('email', 'Votre email', email, {type: 'email', require: 'required'}) }}
+        </div>
 
-    {{ form.input('username', 'Votre identifiant', name, {require: 'required'})}}
+        <button class="btn btn-primary">S'enregistrer</button>
 
-    {{ form.input('password', 'Votre mot de passe', password, {type: 'password', require: 'required'}) }}
-
-    {{ form.input('email', 'Votre email', email, {type: 'email', require: 'required'}) }}
-
-    <button class="btn btn-primary">S'enregistrer</button>
-
-</form>
+        </form>
 
 {% endblock %}

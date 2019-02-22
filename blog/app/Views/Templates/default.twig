@@ -37,6 +37,12 @@
         </ul>
 
         <ul class="navbar-nav justify-content-between">
+        {% if session.auth is not null %}
+            <span class="navbar-text mr-2">
+                Bievenue {{ session.firstname }} !
+            </span>
+        {% endif %}
+
         {% if session.grade == 1 %}
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -51,9 +57,9 @@
 
         {% endif %}
 
-        {% if session.auth == null %}
+        {% if session.auth is null %}
                 <li class="nav-item {{ activeClass('admin.categories.index') }}">
-                    <a class="nav-link" href="index.php?p=users.register">S'inscire</a>
+                    <a class="nav-link mr-2" href="index.php?p=users.register">S'inscire</a>
                 </li>
             </ul>
             <a class="btn btn-primary" href="index.php?p=users.login" role="button">Login</a>

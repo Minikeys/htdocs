@@ -29,7 +29,7 @@ class UsersController extends AppController
 
             if($auth->login($_POST['username'], $_POST['password'])){
 
-                header('Location: index.php?p=admin.posts.index');
+                header('Location: index.php?p=home');
 
             }else{
 
@@ -63,6 +63,8 @@ class UsersController extends AppController
 
                 $result = $this->User->create(
                     ['username' => $_POST['username'],
+                        'firstname' => $_POST['firstname'],
+                        'lastname' => $_POST['lastname'],
                         'password' => sha1($_POST['password']),
                         'email' => $_POST['email']]);
 
