@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use \App;
 
-use Core\Auth\DBAuth;
+use Core\Mail\Email;
 
 use Core\HTML\BootstrapForm;
 
@@ -17,19 +17,30 @@ class ContactController extends AppController
     {
         parent::__construct();
 
-        $this->loadModel('Post');
-
-        $this->loadModel('Category');
-
     }
 
     public function index()
     {
 
-        $posts = $this->Post->last();
-        $categories = $this->Category->all();
+        if(!empty($_POST)){
 
-        $this->render('posts.index', compact('posts', 'categories'));
+            $result = $this->User->create(
+                ['name' => $_POST['name'],
+                    'email' => $_POST['email'],
+                    'message' => $_POST['message']]);
+
+            if ($result){
+
+                $this->flashmessage->success('Votre message à bien été envoyé !');
+                header('Location: index.php?p=contact');
+                exit();
+
+            }
+        }
+
+        $form = new BootstrapForm($_POST);
+
+        $this->render('global.contact', compact('form', 'errors'));
 
     }
 

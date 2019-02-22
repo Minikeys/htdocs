@@ -57,18 +57,30 @@ class UsersController extends AppController
 
         if(!empty($_POST)){
 
-            $result = $this->User->create(
-                ['username' => $_POST['username'],
-                    'password' => sha1($_POST['password']),
-                    'email' => $_POST['email']]);
+            $doublon = $this->User->finduser($_POST['username']);
 
-            if ($result){
+            if($doublon == false){
 
-                $this->flashmessage->success('Compte créé avec succès !');
-                header('Location: index.php?p=home');
+                $result = $this->User->create(
+                    ['username' => $_POST['username'],
+                        'password' => sha1($_POST['password']),
+                        'email' => $_POST['email']]);
+
+                if ($result){
+
+                    $this->flashmessage->success('Compte créé avec succès !');
+                    header('Location: index.php?p=home');
+                    exit();
+
+                }
+            } else {
+
+                $this->flashmessage->error('Username déjà existant');
+                header('Location: index.php?p=users.register');
                 exit();
 
             }
+
         }
 
         $form = new BootstrapForm($_POST);

@@ -38,11 +38,15 @@
 
         <ul class="navbar-nav justify-content-between">
         {% if session.grade == 1 %}
-            <li class="nav-item {{ activeClass('admin.posts.index') }}">
-                <a class="nav-link" href="index.php?p=admin.posts.index">Admin Articles</a>
-            </li>
-            <li class="nav-item {{ activeClass('admin.categories.index') }}">
-                <a class="nav-link" href="index.php?p=admin.categories.index">Admin Catégories</a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Administration
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les Articles</a>
+                    <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les Catégories</a>
+                    <a class="dropdown-item" href="#">Gérer les commentaires</a>
+                </div>
             </li>
 
         {% endif %}

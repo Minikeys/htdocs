@@ -1,0 +1,41 @@
+{% extends '/Templates/default.twig' %}
+
+{% import '/Templates/form.twig' as form %}
+
+{% block title %}
+
+    <title>S'enregistrer - Mon blog</title>
+
+{% endblock %}
+
+{% block content %}
+
+    {% if flash('success') %}
+        <div class="alert alert-success">
+
+            {{ flash('success') }}
+
+        </div>
+    {% endif %}
+
+    {% if flash('error') %}
+        <div class="alert alert-danger">
+
+            {{ flash('error') }}
+
+        </div>
+    {% endif %}
+
+    <form method="post">
+
+        {{ form.input('name', 'Votre Nom', name, {require: 'required'})}}
+
+        {{ form.input('email', 'Votre email', email, {require: 'required'}) }}
+
+        {{ form.textarea('message', 'Votre message', message, {require: 'required'}) }}
+
+        <button class="btn btn-primary">Envoyer</button>
+
+    </form>
+
+{% endblock %}
