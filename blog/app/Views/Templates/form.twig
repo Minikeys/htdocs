@@ -8,7 +8,7 @@
 {% macro textarea(name, label, value = null, options = []) %}
     <div class="form-group {{ options.class }}">
         <label for="{{ name }}">{{ label }}</label>
-        <textarea type="text" class="form-control" id="{{ name }}" name="{{ name }}">{{ value }}</textarea>
+        <textarea type="text" class="form-control" id="{{ name }}" name="{{ name }}" {{ options.require ?: '' }}>{{ value }}</textarea>
     </div>
 {% endmacro %}
 
@@ -17,7 +17,7 @@
 
         <label for="{{ name }}">{{ label }}</label>
 
-        <select class="form-control" name="{{ name }}">'
+        <select class="form-control" name="{{ name }}" {{ options.require ?: '' }}>
 
             {% for key, val in value %}
             <option value='{{ key }}' {% if key == value2 %}selected{% endif %}>{{ val }}</option>

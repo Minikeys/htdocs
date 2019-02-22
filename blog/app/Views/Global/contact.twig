@@ -27,12 +27,23 @@
     {% endif %}
 
     <form method="post">
-
-        {{ form.input('name', 'Votre Nom', name, {require: 'required'})}}
-
-        {{ form.input('email', 'Votre email', email, {require: 'required'}) }}
-
-        {{ form.textarea('message', 'Votre message', message, {require: 'required'}) }}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                {{ form.input('firstname', 'Votre Prénom',  session.firstname , {require: 'required'})}}
+            </div>
+            <div class="form-group col-md-6">
+                {{ form.input('lastname', 'Votre Nom',  session.lastname , {require: 'required'})}}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form.input('email', 'Votre email', session.email, {type: 'email', require: 'required'}) }}
+        </div>
+        <div class="form-group">
+            {{ form.input('subject', 'Sujet',  '' , {require: 'required'})}}
+        </div>
+        <div class="form-group">
+            {{ form.textarea('message', 'Votre message', '', {require: 'required'}) }}
+        </div>
 
         <button class="btn btn-primary">Envoyer</button>
 

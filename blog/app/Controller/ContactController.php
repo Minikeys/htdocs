@@ -17,6 +17,8 @@ class ContactController extends AppController
     {
         parent::__construct();
 
+        $this->mail = new Email();
+
     }
 
     public function index()
@@ -24,18 +26,19 @@ class ContactController extends AppController
 
         if(!empty($_POST)){
 
-            $result = $this->User->create(
-                ['name' => $_POST['name'],
-                    'email' => $_POST['email'],
-                    'message' => $_POST['message']]);
+            $send = $this->mail->contact($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['subject'],$_POST['message']);
 
-            if ($result){
+            if($send === true){
 
-                $this->flashmessage->success('Votre message à bien été envoyé !');
-                header('Location: index.php?p=contact');
-                exit();
+                $this->flashmessage->success('Votre message a été envoyé !');
+
+
+            } else {
+
+                $this->flashmessage->error('Erreur : '. $send);
 
             }
+
         }
 
         $form = new BootstrapForm($_POST);

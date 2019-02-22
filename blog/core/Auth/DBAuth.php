@@ -34,6 +34,7 @@ class DBAuth
                 $_SESSION['grade'] = $user->grade;
                 $_SESSION['firstname'] = $user->firstname;
                 $_SESSION['lastname'] = $user->lastname;
+                $_SESSION['email'] = $user->email;
 
                 return true;
 
