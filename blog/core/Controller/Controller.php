@@ -27,17 +27,13 @@ class Controller
 
     protected function forbidden(){
 
-        header("HTTP/1.1 403 Forbidden");
-
-        die('Acces interdit');
+        header('Location: index.php?p=home');
 
     }
 
     protected function notFound(){
 
-        header("HTTP/1.1 404 Not Found");
-
-        die('Page introuvable');
+        header('Location: index.php?p=home');
     }
 
 }
