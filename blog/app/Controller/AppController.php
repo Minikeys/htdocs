@@ -6,6 +6,7 @@ use Core\Controller\Controller;
 
 use Core\Twig\FlashExtensions;
 use Core\Twig\TemplateExtensions;
+use Core\Twig\PagerFantaExtension;
 
 use Core\Session\FlashService;
 
@@ -36,6 +37,8 @@ class AppController extends Controller
         $this->twig->addExtension(new FlashExtensions());
 
         $this->twig->addExtension(new \Twig_Extension_Debug());
+
+        $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
 
         $page = $_GET['p'];
 

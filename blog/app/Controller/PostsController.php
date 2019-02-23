@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use Core\HTML\BootstrapForm;
+
 class PostsController extends AppController
 {
 
@@ -12,6 +14,8 @@ class PostsController extends AppController
         $this->loadModel('Post');
 
         $this->loadModel('Category');
+
+        $this->loadModel('Comment');
 
     }
 
@@ -47,8 +51,27 @@ class PostsController extends AppController
     public function show(){
 
         $article = $this->Post->findWithCategory($_GET['id']);
+        $comments = $this->Comment->show($_GET['id']);
+        $categories = $this->Category->all();
+        $form = new BootstrapForm($_POST);
 
-        $this->render('posts.show', compact('article'));
+        if(!empty($_POST)){
+
+            $result = $this->Comment->create(
+                ['id_article' => $_GET['id'],
+                    'id_user' => $_SESSION[auth],
+                    'content' => $_POST['content']]);
+
+            if ($result){
+
+                $this->flashmessage->success('Article ajouté');
+                header('Location: index.php?p=posts.show&id='.$_GET['id']);
+                exit();
+
+            }
+        }
+
+        $this->render('posts.show', compact('article', 'comments', 'categories','form'));
 
     }
 

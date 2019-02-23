@@ -1,5 +1,7 @@
 {% extends '/Templates/default.twig' %}
 
+{% import '/Templates/form.twig' as form %}
+
 {% block title %}
 
     <title>{{ variable.article.title }} - Mon blog</title>
@@ -10,9 +12,82 @@
 {% block content %}
 
     <h1>{{ variable.article.title }}</h1>
+        <div class="row">
+            <div class="col-9">
 
-    <p><em>{{ variable.article.category }}</em></p>
+                <p><em>{{ variable.article.category }}</em></p>
 
-    <p>{{ variable.article.content }}</p>
+                <p>{{ variable.article.content | markdown }}</p>
+
+                <div class="card mb-4 box-shadow">
+                    {% if session.auth is not null %}
+                    <div class="card-header">
+                        Ajouter un commentaire
+                    </div>
+                    <div class="card-body">
+                        {% if flash('success') %}
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                {{ flash('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+
+                        {% if flash('error') %}
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                {{ flash('success') }}
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        {% endif %}
+                        <form method="post">
+
+                            {{ form.textarea('content', 'Votre commentaire', variable.form.data.content) }}
+
+                            <button class="btn btn-primary">Envoyer</button>
+
+                        </form>
+                    </div>
+                    {% endif %}
+                    <div class="card-header">
+                        Les commentaires
+                    </div>
+
+                    <div class="card-body">
+                        <ul class="list-group">
+                            {% for comment in variable.comments %}
+                                <li class="list-group-item">
+                                    <blockquote class="blockquote">
+                                        <p class="mb-0">{{ comment.content }}</p>
+                                        <footer class="blockquote-footer">De {{ comment.firstname }} - Le {{ comment.date_create|date("d/m/Y H:i") }} </footer>
+                                    </blockquote>
+
+                                    </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col">
+                <ul class="list-group">
+                    {% for category in variable.categories %}
+                        <a href="{{ category.url }}" class="list-group-item list-group-item-action">
+                        {{ category.title }}
+                        <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+                        </a>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+
+
+
+
+
+
 
 {% endblock %}

@@ -20,7 +20,7 @@ class PostsController extends AppController
 
     public function index(){
 
-        $posts = $this->Post->all();
+        $posts = $this->Post->last();
         $this->render('admin.posts.index', compact('posts'));
 
     }
@@ -32,7 +32,9 @@ class PostsController extends AppController
             $result = $this->Post->create(
                 ['title' => $_POST['title'],
                     'content' => $_POST['content'],
-                    'category_id' => $_POST['category_id']]);
+                    'category_id' => $_POST['category_id'],
+                    'author'=> $_SESSION[auth],
+                    'date_create'=> date('Y-m-d H:i:s')]);
 
             if ($result){
 
@@ -60,7 +62,8 @@ class PostsController extends AppController
             $result = $this->Post->update($_GET['id'],
                 ['title' => $_POST['title'],
                     'content' => $_POST['content'],
-                    'category_id' => $_POST['category_id']]);
+                    'category_id' => $_POST['category_id'],
+                    'date_update'=> date('Y-m-d H:i:s')]);
 
             if ($result){
 

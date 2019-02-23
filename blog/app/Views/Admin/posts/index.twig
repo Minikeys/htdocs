@@ -2,14 +2,14 @@
 
 {% block title %}
 
-    <title>Administrer les articles - Mon blog</title>
+    <title>Gérer les articles - Mon blog</title>
 
 {% endblock %}
 
 {% block content %}
 
 
-<h1>Administrer les articles</h1>
+<h1>Gérer les articles</h1>
 
 <p>
 
@@ -18,23 +18,33 @@
 </p>
 
     {% if flash('success') %}
-        <div class="alert alert-success">
-
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
+    {% if flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     {% endif %}
 
 
 <table class="table">
 
-    <thead>
+    <thead class="thead-dark">
 
     <tr>
-
-        <td>ID</td>
-        <td>Titre</td>
-        <td>Actions</td>
+        <th scope="col">ID</th>
+        <th scope="col">Titre</th>
+        <th scope="col">Catégorie</th>
+        <th scope="col">Actions</th>
 
     </tr>
 
@@ -44,10 +54,10 @@
     {% for post in variable.posts %}
 
         <tr>
-
-            <td>{{ post.id }}</td>
-            <td>{{ post.title }}</td>
-            <td>
+            <td style="width:25%;">{{ post.id }}</td>
+            <td style="width:25%;">{{ post.title }}</td>
+            <td style="width:25%;">{{ post.category }}</td>
+            <td style="width:25%;">
 
                 <a class="btn btn-primary" href="?p=admin.posts.edit&id={{ post.id }}">Editer</a>
 
@@ -66,7 +76,5 @@
     {% endfor %}
 
     </tbody>
-
 </table>
-
 {% endblock %}

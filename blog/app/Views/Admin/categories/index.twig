@@ -2,13 +2,13 @@
 
 {% block title %}
 
-    <title>Administrer les catégories - Mon blog</title>
+    <title>Gérer les catégories - Mon blog</title>
 
 {% endblock %}
 
 {% block content %}
 
-<h1>Administrer les catégories</h1>
+<h1>Gérer les catégories</h1>
 
 <p>
 
@@ -17,22 +17,32 @@
 </p>
 
     {% if flash('success') %}
-        <div class="alert alert-success">
-
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
             {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
 
+    {% if flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     {% endif %}
 
 <table class="table">
 
-    <thead>
+    <thead class="thead-dark">
 
     <tr>
 
-        <td>ID</td>
-        <td>Titre</td>
-        <td>Actions</td>
+        <th scope="col">ID</td>
+        <th scope="col">Titre</td>
+        <th scope="col">Actions</td>
 
     </tr>
 
@@ -43,9 +53,9 @@
 
         <tr>
 
-            <td>{{ category.id }}</td>
-            <td>{{ category.title }}</td>
-            <td>
+            <td style="width:25%;">{{ category.id }}</td>
+            <td style="width:50%;">{{ category.title }}</td>
+            <td style="width:25%;">
 
                 <a class="btn btn-primary" href="?p=admin.categories.edit&id={{ category.id }}">Editer</a>
 
