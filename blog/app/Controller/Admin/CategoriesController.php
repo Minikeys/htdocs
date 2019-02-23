@@ -49,6 +49,7 @@ class CategoriesController extends AppController
     public function edit(){
 
         if(!empty($_POST)){
+            $_GET   = filter_input_array(INPUT_GET, FILTER_SANITIZE_STRING);
 
             $result = $this->Category->update($_GET['id'],
                 ['title' => $_POST['title']]);
