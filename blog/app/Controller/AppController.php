@@ -30,7 +30,7 @@ class AppController extends Controller
 
         $this->loader = new \Twig_Loader_Filesystem($this->viewPath);
 
-        $this->twig = new \Twig_Environment($this->loader, ['debug' => true, 'cache' => ROOT . '/temp']);
+        $this->twig = new \Twig_Environment($this->loader, ['debug' => true]);
 
         $this->twig->addExtension(new TemplateExtensions());
 

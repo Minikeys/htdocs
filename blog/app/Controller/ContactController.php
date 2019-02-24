@@ -43,7 +43,7 @@ class ContactController extends AppController
 
         $form = new BootstrapForm($_POST);
 
-        $this->render('global.contact', compact('form', 'errors'));
+        $this->render('Global.contact', compact('form', 'errors'));
 
     }
 

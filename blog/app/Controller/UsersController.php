@@ -41,7 +41,7 @@ class UsersController extends AppController
 
         $form = new BootstrapForm($_POST);
 
-        $this->render('users.login', compact('form', 'errors'));
+        $this->render('Users.login', compact('form', 'errors'));
     }
 
     public function logout(){
@@ -81,7 +81,7 @@ class UsersController extends AppController
 
         $form = new BootstrapForm($_POST);
 
-        $this->render('users.register', compact('form', 'errors'));
+        $this->render('Users.register', compact('form', 'errors'));
 
     }
 

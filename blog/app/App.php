@@ -37,7 +37,7 @@ class App{
 
     public function getTable($name){
 
-        $class_name = '\\App\\table\\' . ucfirst($name) . 'Table';
+        $class_name = '\\App\\Table\\' . ucfirst($name) . 'Table';
 
         return new $class_name($this->getDb());
 

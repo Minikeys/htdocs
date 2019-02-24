@@ -20,7 +20,7 @@ if(isset($_GET['p'])){
 
 }else{
 
-    $page = 'posts.index';
+    $page = 'home.index';
 
 }
 

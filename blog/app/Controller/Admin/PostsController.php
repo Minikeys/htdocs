@@ -21,7 +21,7 @@ class PostsController extends AppController
     public function index(){
 
         $posts = $this->Post->last();
-        $this->render('admin.posts.index', compact('posts'));
+        $this->render('Admin.posts.index', compact('posts'));
 
     }
 
@@ -50,7 +50,7 @@ class PostsController extends AppController
 
         $form = new BootstrapForm($_POST);
 
-        $this->render('admin.posts.edit', compact('categories', 'form'));
+        $this->render('Admin.posts.edit', compact('categories', 'form'));
 
     }
 
@@ -80,7 +80,7 @@ class PostsController extends AppController
 
         $form = new BootstrapForm($post);
 
-        $this->render('admin.posts.edit', compact('categories', 'form'));
+        $this->render('Admin.posts.edit', compact('categories', 'form'));
 
     }
 

@@ -24,7 +24,7 @@ class PostsController extends AppController
         $posts = $this->Post->last();
         $categories = $this->Category->all();
 
-        $this->render('posts.index', compact('posts', 'categories'));
+        $this->render('Posts.index', compact('posts', 'categories'));
 
     }
 
@@ -42,7 +42,7 @@ class PostsController extends AppController
 
         $categories = $this->Category->all();
 
-        $this->render('posts.category', compact('articles', 'categories', 'categorie'));
+        $this->render('Posts.category', compact('articles', 'categories', 'categorie'));
 
     }
 
@@ -68,7 +68,7 @@ class PostsController extends AppController
             }
         }
 
-        $this->render('posts.show', compact('article', 'comments', 'categories','form'));
+        $this->render('Posts.show', compact('article', 'comments', 'categories','form'));
 
     }
 

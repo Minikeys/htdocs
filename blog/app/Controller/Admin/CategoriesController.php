@@ -25,7 +25,7 @@ class CategoriesController extends AppController
 
         $items = $this->Category->all();
 
-        $this->render('admin.categories.index', compact('items'));
+        $this->render('Admin.categories.index', compact('items'));
 
     }
 
@@ -44,7 +44,7 @@ class CategoriesController extends AppController
 
         $form = new BootstrapForm($category);
 
-        $this->render('admin.categories.edit', compact('form'));
+        $this->render('Admin.categories.edit', compact('form'));
 
     }
 
@@ -65,7 +65,7 @@ class CategoriesController extends AppController
 
         $form = new BootstrapForm($category);
 
-        $this->render('admin.categories.edit', compact('form'));
+        $this->render('Admin.categories.edit', compact('form'));
 
     }
 

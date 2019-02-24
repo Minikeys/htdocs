@@ -30,7 +30,7 @@ class BootstrapForm extends Form
      * @return string
      */
 
-    public function input($name, $label, $options = []){
+    public function input($name, $options = []){
 
         $type = isset($options['type']) ? $options['type'] : 'text';
 

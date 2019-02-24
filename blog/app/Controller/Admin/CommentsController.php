@@ -21,7 +21,7 @@ class CommentsController extends AppController
     public function index(){
 
         $comments = $this->Comment->all();
-        $this->render('admin.comments.index', compact('comments'));
+        $this->render('Admin.comments.index', compact('comments'));
 
     }
 

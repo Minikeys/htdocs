@@ -21,7 +21,7 @@ class HomeController extends AppController
         $posts = $this->Post->home();
         $categories = $this->Category->all();
 
-        $this->render('global.home', compact('posts', 'categories'));
+        $this->render('Global.home', compact('posts', 'categories'));
 
     }
 
