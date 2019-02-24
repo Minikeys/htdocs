@@ -51,9 +51,13 @@ class CategoriesController extends AppController
 
             $result = $this->Category->update($_GET['id'],
                 ['title' => $_POST['title']]);
+            if ($result){
 
-            $this->flashmessage->success('Catégorie éditée');
-            header('Location: index.php?p=admin.categories.index');
+                $this->flashmessage->success('Catégorie éditée');
+                header('Location: index.php?p=admin.categories.index');
+                
+            }
+
 
         }
 
