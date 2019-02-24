@@ -19,8 +19,6 @@ class Controller
 
         ob_get_clean();
 
-        //var_dump($variables);
-
         echo $template->render(['variable' => $variables]);
 
     }
