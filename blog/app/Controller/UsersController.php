@@ -72,14 +72,12 @@ class UsersController extends AppController
 
                     $this->flashmessage->success('Compte créé avec succès !');
                     header('Location: index.php?p=home');
-                    exit();
 
                 }
             } else {
 
                 $this->flashmessage->error('Username déjà existant');
                 header('Location: index.php?p=users.register');
-                exit();
 
             }
 

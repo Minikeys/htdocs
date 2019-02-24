@@ -36,7 +36,6 @@ class CommentsController extends AppController
 
                 $this->flashmessage->success('Commentaire approuvé');
                 header('Location: index.php?p=admin.comments.index');
-                exit();
 
             }
         }
@@ -53,7 +52,7 @@ class CommentsController extends AppController
 
                 $this->flashmessage->success('Commentaire supprimé');
                 header('Location: index.php?p=admin.comments.index');
-                exit();
+
             }
         }
 

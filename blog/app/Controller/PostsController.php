@@ -66,7 +66,6 @@ class PostsController extends AppController
 
                 $this->flashmessage->success('Article ajouté');
                 header('Location: index.php?p=posts.show&id='.$_GET['id']);
-                exit();
 
             }
         }

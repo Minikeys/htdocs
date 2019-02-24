@@ -35,7 +35,6 @@ class CategoriesController extends AppController
 
             $this->flashmessage->success('Catégorie ajoutée');
             header('Location: index.php?p=admin.categories.index');
-            exit();
 
 
         }
@@ -55,7 +54,6 @@ class CategoriesController extends AppController
 
             $this->flashmessage->success('Catégorie éditée');
             header('Location: index.php?p=admin.categories.index');
-            exit();
 
         }
 
@@ -77,7 +75,7 @@ class CategoriesController extends AppController
 
                 $this->flashmessage->success('Catégorie supprimée');
                 header('Location: index.php?p=admin.categories.index');
-                exit();
+
             }
         }
 

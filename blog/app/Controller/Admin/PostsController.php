@@ -40,7 +40,6 @@ class PostsController extends AppController
 
                 $this->flashmessage->success('Article ajouté');
                 header('Location: index.php?p=admin.posts.index');
-                exit();
 
             }
         }
@@ -69,7 +68,6 @@ class PostsController extends AppController
 
                 $this->flashmessage->success('Article édité');
                 header('Location: index.php?p=admin.posts.index');
-                exit();
 
             }
         }
@@ -96,7 +94,7 @@ class PostsController extends AppController
 
                 $this->flashmessage->success('Article supprimé');
                 header('Location: index.php?p=admin.posts.index');
-                exit();
+
             }
         }
 
