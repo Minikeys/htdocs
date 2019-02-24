@@ -96,6 +96,7 @@ class PostsController extends AppController
                 header('Location: index.php?p=admin.posts.index');
 
             }
+
         }
 
     }

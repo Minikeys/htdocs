@@ -30,8 +30,6 @@ class PostsController extends AppController
 
     public function category(){
 
-        $app = \App::getInstance();
-
         $categorie = $this->Category->find($_GET['id']);
 
         if($categorie === false){

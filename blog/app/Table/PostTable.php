@@ -81,4 +81,18 @@ class PostTable extends Table
 
     }
 
+    public function count($id){
+
+        $count = $this->query("SELECT * FROM {$this->table} WHERE category_id = ? ", [$id], true);
+
+        if (!empty($count)){
+
+            return $count;
+
+        }
+
+
+
+    }
+
 }

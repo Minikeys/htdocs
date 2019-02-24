@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App;
 use Core\HTML\BootstrapForm;
+use function PHPSTORM_META\elementType;
 
 class CategoriesController extends AppController
 {
@@ -14,6 +15,8 @@ class CategoriesController extends AppController
         parent::__construct();
 
         $this->loadModel('Category');
+
+        $this->loadModel('Post');
 
     }
 
@@ -70,14 +73,28 @@ class CategoriesController extends AppController
 
         if(!empty($_POST)){
 
-            $result = $this->Category->delete($_POST['id']);
+            $count = $this->Post->count($_POST['id']);
 
-            if ($result){
+            if(empty($count)){
 
-                $this->flashmessage->success('Catégorie supprimée');
+                $result = $this->Category->delete($_POST['id']);
+
+                if ($result){
+
+                    $this->flashmessage->success('Catégorie supprimée');
+                    header('Location: index.php?p=admin.categories.index');
+
+                }
+
+
+
+            } else {
+
+                $this->flashmessage->error('Catégorie contient des articles');
                 header('Location: index.php?p=admin.categories.index');
 
             }
+
         }
 
     }
