@@ -129,4 +129,4 @@
              return $this->getPDO()->lastInsertId();
 
          }
-     };
+     }
