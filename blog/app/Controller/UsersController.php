@@ -57,7 +57,7 @@ class UsersController extends AppController
 
         if(!empty($_POST)){
 
-            $doublon = $this->User->finduser($_POST['username']);
+            $doublon = $this->User->finduser($_POST['username'], $_POST['email']);
 
             if($doublon === null){
 
@@ -75,7 +75,7 @@ class UsersController extends AppController
                 }
             }
 
-                $this->flashmessage->error('Username déjà existant');
+                $this->flashmessage->error('Username / Email déjà existant');
 
         }
 
