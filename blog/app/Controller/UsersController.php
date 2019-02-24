@@ -59,7 +59,7 @@ class UsersController extends AppController
 
             $doublon = $this->User->finduser($_POST['username']);
 
-            if($doublon == false){
+            if($doublon === null){
 
                 $result = $this->User->create(
                     ['username' => $_POST['username'],
@@ -71,15 +71,11 @@ class UsersController extends AppController
                 if ($result){
 
                     $this->flashmessage->success('Compte créé avec succès !');
-                    header('Location: index.php?p=home');
 
                 }
-            } else {
+            }
 
                 $this->flashmessage->error('Username déjà existant');
-                header('Location: index.php?p=users.register');
-
-            }
 
         }
 

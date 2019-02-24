@@ -32,10 +32,10 @@ class CategoriesController extends AppController
 
             $result = $this->Category->create(
                 ['title' => $_POST['title']]);
-
-            $this->flashmessage->success('Catégorie ajoutée');
-            header('Location: index.php?p=admin.categories.index');
-
+            if ($result){
+                $this->flashmessage->success('Catégorie ajoutée');
+                header('Location: index.php?p=admin.categories.index');
+            }
 
         }
 
@@ -52,12 +52,9 @@ class CategoriesController extends AppController
             $result = $this->Category->update($_GET['id'],
                 ['title' => $_POST['title']]);
             if ($result){
-
                 $this->flashmessage->success('Catégorie éditée');
                 header('Location: index.php?p=admin.categories.index');
-                
             }
-
 
         }
 

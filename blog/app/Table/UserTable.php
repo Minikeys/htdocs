@@ -18,13 +18,9 @@ class UserTable extends Table
 
         if (!empty($finduser)){
 
-            return true;
+            return $finduser;
 
-        } else {
-
-            return false;
         }
-
 
 
     }
