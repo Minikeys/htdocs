@@ -30,7 +30,7 @@ class Table
 
     public function all(){
 
-        return $this->query('SELECT * FROM ' . $this->table);
+        return $this->query("SELECT * FROM {$this->table}");
 
     }
 
