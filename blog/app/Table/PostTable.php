@@ -122,9 +122,9 @@ class PostTable extends Table
             $this->db,
             'SELECT articles.id, articles.title, articles.content, categories.title as category 
             FROM articles LEFT JOIN categories ON category_id = categories.id
-            WHERE articles.category_id = '.$category_id.'
+            WHERE articles.category_id = '.$this->category_id.'
             ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles WHERE articles.category_id ='.$category_id
+            'SELECT COUNT(id) AS total FROM articles WHERE articles.category_id ='.$this->category_id
         );
 
         return (new Pagerfanta($query))
