@@ -2,7 +2,10 @@
 
 namespace App\Table;
 
+use \App;
+use Core\Table\PaginatedQuery;
 use Core\Table\Table;
+use Pagerfanta\Pagerfanta;
 
 class PostTable extends Table
 {
@@ -38,7 +41,7 @@ class PostTable extends Table
                   
                   FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
                   
-                  ORDER BY articles.date_update DESC LIMIT 4");
+                  ORDER BY articles.date_update DESC");
 
 
     }
@@ -91,7 +94,22 @@ class PostTable extends Table
 
         }
 
+    }
 
+    public function findPaginated(int $perPage, int $paginPage): Pagerfanta
+    {
+        $query = new PaginatedQuery(
+            $this->db,
+            'SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
+            FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
+            ORDER BY articles.date_update DESC',
+            'SELECT COUNT(id) AS total FROM articles',
+            Post::class
+        );
+
+        return (new Pagerfanta($query))
+            ->setMaxPerPage($perPage)
+            ->setCurrentPage($paginPage);
 
     }
 

@@ -18,7 +18,19 @@ class HomeController extends AppController
     public function index()
     {
 
-        $posts = $this->Post->home();
+
+        if(isset($_GET['d'])){
+
+            $paginpage = $_GET['d'];
+
+        }else{
+
+            $paginpage = '1';
+
+        }
+
+        $posts = $this->Post->findPaginated(4, $paginpage);
+
         $categories = $this->Category->all();
 
         $this->render('Global.home', compact('posts', 'categories'));
