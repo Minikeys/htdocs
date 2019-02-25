@@ -17,17 +17,12 @@ class PaginatedQuery extends Table implements AdapterInterface
      * @var string
      */
     private $countResults;
-    /**
-     * @var string
-     */
-    private $entity;
 
-    public function __construct($db, string $results, string $countResults, string $entity)
+    public function __construct($db, string $results, string $countResults)
     {
         parent::__construct($db);
         $this->results = $results;
         $this->countResults= $countResults;
-        $this->entity = $entity;
     }
 
     /**

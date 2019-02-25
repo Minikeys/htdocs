@@ -103,8 +103,7 @@ class PostTable extends Table
             'SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
             FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
             ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles',
-            Post::class
+            'SELECT COUNT(id) AS total FROM articles'
         );
 
         return (new Pagerfanta($query))
