@@ -17,12 +17,19 @@ class PaginatedQuery extends Table implements AdapterInterface
      * @var string
      */
     private $countResults;
+    private $category_id;
+    /**
+     * @var string
+     */
+    private $orderResults;
 
-    public function __construct($db, string $results, string $countResults)
+    public function __construct($db, string $results, string $orderResults, string $countResults, $category_id)
     {
         parent::__construct($db);
         $this->results = $results;
         $this->countResults= $countResults;
+        $this->category_id = $category_id;
+        $this->orderResults = $orderResults;
     }
 
     /**
@@ -32,7 +39,16 @@ class PaginatedQuery extends Table implements AdapterInterface
      */
     public function getNbResults(): int
     {
-        $count = $this->db->query("{$this->countResults}");
+        if(is_null($this->category_id)){
+
+            $count = $this->db->query("{$this->countResults}");
+
+        } else {
+
+            $count = $this->db->query("{$this->countResults} WHERE articles.category_id = {$this->category_id}");
+
+        }
+
 
         $result = $count[0]->total;
 
@@ -52,7 +68,14 @@ class PaginatedQuery extends Table implements AdapterInterface
         $this->param1 = intval($offset);
         $this->param2 = intval($length);
 
-        return $this->db->query("{$this->results} LIMIT {$this->param1}, {$this->param2}");
+        if(is_null($this->category_id)){
+            return $this->db->query("{$this->results} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
+        } else {
+            return $this->db->query("{$this->results} WHERE articles.category_id = {$this->category_id} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
+
+        }
+
+
 
     }
 }

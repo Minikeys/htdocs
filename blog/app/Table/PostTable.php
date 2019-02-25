@@ -102,9 +102,10 @@ class PostTable extends Table
         $query = new PaginatedQuery(
             $this->db,
             'SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
-            FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
-            ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles'
+            FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id',
+            'ORDER BY articles.date_update DESC',
+            'SELECT COUNT(id) AS total FROM articles',
+            null
         );
 
         return (new Pagerfanta($query))
@@ -121,10 +122,10 @@ class PostTable extends Table
         $query = new PaginatedQuery(
             $this->db,
             'SELECT articles.id, articles.title, articles.content, categories.title as category 
-            FROM articles LEFT JOIN categories ON category_id = categories.id
-            WHERE articles.category_id = {$this->category_id}
-            ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles WHERE articles.category_id = {$this->category_id}'
+            FROM articles LEFT JOIN categories ON category_id = categories.id',
+            'ORDER BY articles.date_update DESC',
+            'SELECT COUNT(id) AS total FROM articles',
+            $this->category_id
         );
 
         return (new Pagerfanta($query))
