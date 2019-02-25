@@ -72,7 +72,7 @@ class PostsController extends AppController
 
             if ($result){
 
-                $this->flashmessage->success('Article ajouté');
+                $this->flashmessage->success('Commentaire ajoutée');
                 header('Location: index.php?p=posts.show&id='.$_GET['id']);
 
             }
