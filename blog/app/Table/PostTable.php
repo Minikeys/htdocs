@@ -11,6 +11,7 @@ class PostTable extends Table
 {
 
     protected $table = 'articles';
+    public $category_id;
 
     /**
      * Récupère les derniers articles
@@ -109,6 +110,27 @@ class PostTable extends Table
         return (new Pagerfanta($query))
             ->setMaxPerPage($perPage)
             ->setCurrentPage($paginPage);
+
+    }
+
+    public function lastByCategoryPaginated(int $category_id, int $perPage, int $paginPage): Pagerfanta
+    {
+
+        $this->category_id = $category_id;
+
+        $query = new PaginatedQuery(
+            $this->db,
+            'SELECT articles.id, articles.title, articles.content, categories.title as category 
+            FROM articles LEFT JOIN categories ON category_id = categories.id
+            WHERE articles.category_id = '.$category_id.'
+            ORDER BY articles.date_update DESC',
+            'SELECT COUNT(id) AS total FROM articles WHERE articles.category_id ='.$category_id
+        );
+
+        return (new Pagerfanta($query))
+            ->setMaxPerPage($perPage)
+            ->setCurrentPage($paginPage);
+
 
     }
 

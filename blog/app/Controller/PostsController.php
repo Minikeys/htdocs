@@ -48,7 +48,17 @@ class PostsController extends AppController
 
         }
 
-        $articles = $this->Post->lastByCategory($_GET['id']);
+        if(isset($_GET['d'])){
+
+            $paginpage = $_GET['d'];
+
+        }else{
+
+            $paginpage = '1';
+
+        }
+
+        $articles = $this->Post->lastByCategoryPaginated($_GET['id'], 4, $paginpage);
 
         $categories = $this->Category->all();
 

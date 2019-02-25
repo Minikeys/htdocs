@@ -44,7 +44,11 @@ class AppController extends Controller
 
         $page = $_GET['p'];
 
+        $pagecategory = $_GET['p'].'&id='.$_GET['id'];
+
         $this->twig->addGlobal('current_page', $page);
+
+        $this->twig->addGlobal('current_category', $pagecategory);
 
         $this->twig->addGlobal('session', $_SESSION);
 
