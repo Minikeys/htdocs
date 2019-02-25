@@ -18,7 +18,6 @@ class HomeController extends AppController
     public function index()
     {
 
-
         if(isset($_GET['d'])){
 
             $paginpage = $_GET['d'];
