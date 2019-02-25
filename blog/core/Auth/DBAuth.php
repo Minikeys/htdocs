@@ -49,7 +49,7 @@ class DBAuth
 
     public function logged(){
 
-        return $_SESSION['auth'];
+        return $_SESSION['grade'];
 
     }
 
@@ -62,6 +62,20 @@ class DBAuth
         }
 
         return false;
+
+    }
+
+    public function admin(){
+
+        if($_SESSION['grade'] == 1){
+
+            return $_SESSION['grade'];
+
+        }else{
+
+            return null;
+        }
+
 
     }
 
