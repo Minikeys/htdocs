@@ -51,6 +51,8 @@ class AppController extends Controller
 
         $this->twig->addGlobal('current_category', $pagecategory);
 
+        $this->twig->addGlobal('nameapp', 'CyberCreative');
+
         $this->twig->addGlobal('session', $_SESSION);
 
         $this->flashmessage = new FlashService();

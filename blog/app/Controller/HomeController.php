@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-use Core\Rooter\Rooter;
 
 class HomeController extends AppController
 {
@@ -19,9 +18,7 @@ class HomeController extends AppController
     public function index()
     {
 
-        $paginate = Rooter::get('d', 1);
-
-        $posts = $this->Post->findPaginated(4, $paginate);
+        $posts = $this->Post->home();
 
         $categories = $this->Category->all();
 

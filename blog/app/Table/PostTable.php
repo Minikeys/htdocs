@@ -42,7 +42,7 @@ class PostTable extends Table
                   
                   FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
                   
-                  ORDER BY articles.date_update DESC");
+                  ORDER BY articles.date_update DESC LIMIT 0, 6");
 
 
     }
