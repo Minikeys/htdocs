@@ -30,6 +30,8 @@ class DBAuth
 
             if($user->password === sha1($password)){
 
+                if($user->statut == 0){
+
                 $_SESSION['auth'] = $user->id;
                 $_SESSION['grade'] = $user->grade;
                 $_SESSION['firstname'] = $user->firstname;
@@ -37,6 +39,7 @@ class DBAuth
                 $_SESSION['email'] = $user->email;
 
                 return true;
+                }
 
             }
 

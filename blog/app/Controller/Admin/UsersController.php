@@ -61,15 +61,33 @@ class UsersController extends AppController
 
     }
 
-    public function delete(){
+    public function desactived(){
 
         if(!empty($_POST)){
 
-            $result = $this->User->delete($_POST['id']);
+            $result = $this->User->update($_POST['id'],
+                ['statut' => '1']);
 
             if ($result){
 
-                $this->flashmessage->success('Utilisateur supprimé');
+                $this->flashmessage->success('Utilisateur désactivé');
+                header('Location: index.php?p=admin.users.index');
+
+            }
+        }
+
+    }
+
+    public function activate(){
+
+        if(!empty($_POST)){
+
+            $result = $this->User->update($_POST['id'],
+                ['statut' => '0']);
+
+            if ($result){
+
+                $this->flashmessage->success('Utilisateur activé');
                 header('Location: index.php?p=admin.users.index');
 
             }

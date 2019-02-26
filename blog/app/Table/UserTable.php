@@ -47,7 +47,7 @@ class UserTable extends Table
     {
         $query = new PaginatedQuery(
             $this->db,
-            'SELECT users.id, users.username, users.firstname, users.lastname, users.email, users.grade
+            'SELECT users.id, users.username, users.firstname, users.lastname, users.email, users.grade, users.statut
             FROM users',
             'ORDER BY users.id ASC',
             'SELECT COUNT(id) AS total FROM users',
@@ -63,7 +63,7 @@ class UserTable extends Table
     public function all(){
 
         return $this->query("
-                  SELECT users.id, users.username, users.firstname, users.lastname, users.email, users.grade
+                  SELECT users.id, users.username, users.firstname, users.lastname, users.email, users.grade, users.statut
                   
                   FROM {$this->table}");
 

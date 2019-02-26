@@ -40,6 +40,7 @@
         <th scope="col">Username</th>
         <th scope="col">Prénom - Nom</th>
         <th scope="col">Grade</th>
+        <th scope="col">Statut</th>
         <th scope="col">Actions</th>
 
     </tr>
@@ -50,10 +51,11 @@
     {% for user in variable.users %}
 
         <tr>
-            <td style="width:10%;">{{ user.id }}</td>
-            <td style="width:20%;">{{ user.username }}</td>
-            <td style="width:25%;">{{ user.firstname }} {{ user.lastname }}</td>
-            <td style="width:15%;">{% if user.grade == 1 %} Administrateur {% else %} Utilisateur {% endif %}</td>
+            <td style="width:5%;">{{ user.id }}</td>
+            <td style="width:15%;">{{ user.username }}</td>
+            <td style="width:20%;">{{ user.firstname }} {{ user.lastname }}</td>
+            <td style="width:10%;">{% if user.grade == 1 %} Administrateur {% else %} Utilisateur {% endif %}</td>
+            <td style="width:10%;">{% if user.statut == 1 %} Désactivé {% else %} Actif {% endif %}</td>
             <td style="width:30%;">
                 {% if user.grade  == 0 %}
                     <form action="?p=admin.users.upgrade" method="post" style="display: inline;">
@@ -73,13 +75,23 @@
                     </form>
                 {% endif %}
 
-                <form action="?p=admin.users.delete" method="post" style="display: inline;">
+                {% if user.statut  == 0 %}
+                    <form action="?p=admin.users.desactived" method="post" style="display: inline;">
 
-                    <input type="hidden" name="id" value="{{ user.id }}">
+                        <input type="hidden" name="id" value="{{ user.id }}">
 
-                    <button type="submit" class="btn btn-danger">Supprimer</button>
+                        <button type="submit" class="btn btn-danger">Désactiver</button>
 
-                </form>
+                    </form>
+                {% else %}
+                    <form action="?p=admin.users.activate" method="post" style="display: inline;">
+
+                        <input type="hidden" name="id" value="{{ user.id }}">
+
+                        <button type="submit" class="btn btn-success">Activer</button>
+
+                    </form>
+                {% endif %}
 
             </td>
 
