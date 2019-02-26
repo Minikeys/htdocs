@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -10,13 +10,36 @@
         <title>{{ nameapp }}</title>
     {% endblock %}
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/starter-template/">
     <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sticky-footer-navbar/">
 
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    {% block css %} {% endblock %}
+
+    {% block scriptinit %} {% endblock %}
+
     <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
         main > .container {
             padding: 80px 15px 0;
         }
+
         .footer {
             background-color: #f5f5f5;
         }
@@ -25,78 +48,76 @@
             padding-right: 15px;
             padding-left: 15px;
         }
+
+        code {
+            font-size: 80%;
+        }
+
     </style>
-    <!-- Fontawesome CSS -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    {% block css %} {% endblock %}
-    {% block scriptinit %} {% endblock %}
+    
 </head>
-<body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" data-spy="affix" data-offset-top="197">
-    <a class="navbar-brand" href="index.php?p=home">{{ nameapp }}</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item {{ activeClass('home') }}">
-                <a class="nav-link" href="index.php?p=home">Acceuil</a>
-            </li>
-            <li class="nav-item {{ activeClass('posts.index') }}">
-                <a class="nav-link" href="index.php?p=posts.index">Actualités</a>
-            </li>
-            <li class="nav-item {{ activeClass('contact') }}">
-                <a class="nav-link" href="index.php?p=contact">Nous Contacter</a>
-            </li>
-        </ul>
-
-        <ul class="navbar-nav justify-content-between">
-        {% if session.auth is not null %}
-            <span class="navbar-text mr-2">
+<body class="d-flex flex-column h-100">
+<header>
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="index.php?p=home">{{ nameapp }}</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item {{ activeClass('home') }}">
+                    <a class="nav-link" href="index.php?p=home">Acceuil</a>
+                </li>
+                <li class="nav-item {{ activeClass('posts.index') }}">
+                    <a class="nav-link" href="index.php?p=posts.index">Actualités</a>
+                </li>
+                <li class="nav-item {{ activeClass('contact') }}">
+                    <a class="nav-link" href="index.php?p=contact">Nous Contacter</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav justify-content-between">
+                {% if session.auth is not null %}
+                    <span class="navbar-text mr-2">
                 Bievenue {{ session.firstname }} !
             </span>
-        {% endif %}
+                {% endif %}
 
-        {% if session.grade == 1 %}
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Administration
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les articles</a>
-                    <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les catégories</a>
-                    <a class="dropdown-item {{ activeClass('admin.comments.index') }}" href="index.php?p=admin.comments.index">Gérer les commentaires</a>
-                    <a class="dropdown-item {{ activeClass('admin.users.index') }}" href="index.php?p=admin.users.index">Gérer les utilisateurs</a>
-                </div>
-            </li>
+                {% if session.grade == 1 %}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Administration
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les articles</a>
+                            <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les catégories</a>
+                            <a class="dropdown-item {{ activeClass('admin.comments.index') }}" href="index.php?p=admin.comments.index">Gérer les commentaires</a>
+                            <a class="dropdown-item {{ activeClass('admin.users.index') }}" href="index.php?p=admin.users.index">Gérer les utilisateurs</a>
+                        </div>
+                    </li>
 
-        {% endif %}
+                {% endif %}
 
-        {% if session.auth is null %}
+                {% if session.auth is null %}
                 <li class="nav-item {{ activeClass('admin.categories.index') }}">
                     <a class="nav-link mr-2" href="index.php?p=users.register">S'inscire</a>
                 </li>
             </ul>
             <a class="btn btn-primary" href="index.php?p=users.login" role="button">Se connecter</a>
-        {% else %}
-            <a class="btn btn-danger" href="index.php?p=users.logout" role="button">Se déconnecter</a>
-        {% endif %}
+            {% else %}
+                <a class="btn btn-danger" href="index.php?p=users.logout" role="button">Se déconnecter</a>
+            {% endif %}
+        </div>
+    </nav>
+</header>
 
-    </div>
-</nav>
-
+<!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
-
     <div class="container">
-
         {% block content %} {% endblock %}
-
     </div>
+</main>
 
-</main><!-- /.container -->
 
 {% include '/Templates/footer.twig' %}
 
@@ -104,3 +125,6 @@
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.3/assets/js/vendor/jquery-slim.min.js"><\/script>')</script><script src="/docs/4.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script></body>
+</html>
