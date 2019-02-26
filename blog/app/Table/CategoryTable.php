@@ -29,4 +29,11 @@ class CategoryTable extends Table
 
     }
 
+    public function deletecategory($id){
+
+        return $this->query("UPDATE posts SET category_id = 1; DELETE FROM {$this->table} WHERE id = ?", [$id], false);
+
+
+    }
+
 }

@@ -135,4 +135,11 @@ class PostTable extends Table
 
     }
 
+    public function deletepost($id){
+
+            return $this->query("DELETE FROM comments WHERE id_article = ?; DELETE FROM {$this->table} WHERE id = ?", [$id, $id], false);
+
+
+    }
+
 }

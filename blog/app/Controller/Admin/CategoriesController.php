@@ -74,11 +74,9 @@ class CategoriesController extends AppController
 
         if(!empty($_POST)){
 
-            $count = $this->Post->count($_POST['id']);
+            if($_POST['id'] > 1){
 
-            if(empty($count)){
-
-                $result = $this->Category->delete($_POST['id']);
+                $result = $this->Category->deletecategory($_POST['id']);
 
                 if ($result){
 
@@ -86,15 +84,12 @@ class CategoriesController extends AppController
                     header('Location: index.php?p=admin.categories.index');
 
                 }
-
-
-
-            } else {
-
-                $this->flashmessage->error('Catégorie contient des articles');
+            }else{
+                $this->flashmessage->error('La catégorie ne peut être supprimé');
                 header('Location: index.php?p=admin.categories.index');
-
             }
+
+
 
         }
 

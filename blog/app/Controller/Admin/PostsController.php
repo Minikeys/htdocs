@@ -97,7 +97,7 @@ class PostsController extends AppController
 
         if(!empty($_POST)){
 
-            $result = $this->Post->delete($_POST['id']);
+            $result = $this->Post->deletepost($_POST['id']);
 
             if ($result){
 
