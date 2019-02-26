@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App;
 use Core\HTML\BootstrapForm;
+use Core\Rooter\Rooter;
 
 class CommentsController extends AppController
 {
@@ -20,7 +21,8 @@ class CommentsController extends AppController
 
     public function index(){
 
-        $comments = $this->Comment->all();
+        $paginate = Rooter::get('d', 1);
+        $comments = $this->Comment->findPaginated(8, $paginate);
         $this->render('Admin.comments.index', compact('comments'));
 
     }

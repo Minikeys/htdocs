@@ -43,17 +43,17 @@ class PostsController extends AppController
 
         $paginate = Rooter::get('d', 1);
 
-        $articles = $this->Post->lastByCategoryPaginated($_GET['id'], 4, $paginate);
+        $posts = $this->Post->lastByCategoryPaginated($_GET['id'], 4, $paginate);
 
         $categories = $this->Category->all();
 
-        $this->render('Posts.category', compact('articles', 'categories', 'categorie'));
+        $this->render('Posts.category', compact('posts', 'categories', 'categorie'));
 
     }
 
     public function show(){
 
-        $article = $this->Post->findWithCategory($_GET['id']);
+        $post = $this->Post->findWithCategory($_GET['id']);
         $comments = $this->Comment->show($_GET['id']);
         $categories = $this->Category->all();
         $form = new BootstrapForm($_POST);
@@ -73,7 +73,7 @@ class PostsController extends AppController
             }
         }
 
-        $this->render('Posts.show', compact('article', 'comments', 'categories','form'));
+        $this->render('Posts.show', compact('post', 'comments', 'categories','form'));
 
     }
 

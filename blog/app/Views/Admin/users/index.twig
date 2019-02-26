@@ -1,0 +1,93 @@
+{% extends '/Templates/default.twig' %}
+
+{% block title %}
+
+    <title>Gérer les utilisateurs - {{ nameapp }}</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Gérer les utilisateurs</h1>
+
+
+    {% if flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ flash('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+
+<table class="table">
+
+    <thead class="thead-dark">
+
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Username</th>
+        <th scope="col">Prénom - Nom</th>
+        <th scope="col">Grade</th>
+        <th scope="col">Actions</th>
+
+    </tr>
+
+    </thead>
+    <tbody>
+
+    {% for user in variable.users %}
+
+        <tr>
+            <td style="width:10%;">{{ user.id }}</td>
+            <td style="width:20%;">{{ user.username }}</td>
+            <td style="width:25%;">{{ user.firstname }} {{ user.lastname }}</td>
+            <td style="width:15%;">{% if user.grade == 1 %} Administrateur {% else %} Utilisateur {% endif %}</td>
+            <td style="width:30%;">
+                {% if user.grade  == 0 %}
+                    <form action="?p=admin.users.upgrade" method="post" style="display: inline;">
+
+                        <input type="hidden" name="id" value="{{ user.id }}">
+
+                        <button type="submit" class="btn btn-success">Changer le grade</button>
+
+                    </form>
+                {% else %}
+                    <form action="?p=admin.users.downgrade" method="post" style="display: inline;">
+
+                        <input type="hidden" name="id" value="{{ user.id }}">
+
+                        <button type="submit" class="btn btn-success">Changer le grade</button>
+
+                    </form>
+                {% endif %}
+
+                <form action="?p=admin.users.delete" method="post" style="display: inline;">
+
+                    <input type="hidden" name="id" value="{{ user.id }}">
+
+                    <button type="submit" class="btn btn-danger">Supprimer</button>
+
+                </form>
+
+            </td>
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+</table>
+    {{ paginate(variable.users, current_page) }}
+{% endblock %}

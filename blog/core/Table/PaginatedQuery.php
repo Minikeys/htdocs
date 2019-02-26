@@ -45,7 +45,7 @@ class PaginatedQuery extends Table implements AdapterInterface
 
         } else {
 
-            $count = $this->db->query("{$this->countResults} WHERE articles.category_id = {$this->category_id}");
+            $count = $this->db->query("{$this->countResults} WHERE posts.category_id = {$this->category_id}");
 
         }
 
@@ -71,7 +71,7 @@ class PaginatedQuery extends Table implements AdapterInterface
         if(is_null($this->category_id)){
             return $this->db->query("{$this->results} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
         } else {
-            return $this->db->query("{$this->results} WHERE articles.category_id = {$this->category_id} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
+            return $this->db->query("{$this->results} WHERE posts.category_id = {$this->category_id} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
 
         }
 

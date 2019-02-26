@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App;
 use Core\HTML\BootstrapForm;
+use Core\Rooter\Rooter;
 
 class PostsController extends AppController
 {
@@ -20,7 +21,8 @@ class PostsController extends AppController
 
     public function index(){
 
-        $posts = $this->Post->last();
+        $paginate = Rooter::get('d', 1);
+        $posts = $this->Post->findPaginated(8, $paginate);
         $this->render('Admin.posts.index', compact('posts'));
 
     }

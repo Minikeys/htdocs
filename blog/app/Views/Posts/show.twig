@@ -4,20 +4,20 @@
 
 {% block title %}
 
-    <title>{{ variable.article.title }} - {{ nameapp }}</title>
+    <title>{{ variable.post.title }} - {{ nameapp }}</title>
 
 {% endblock %}
 
 
 {% block content %}
 
-    <h1>{{ variable.article.title }}</h1>
+    <h1>{{ variable.post.title }}</h1>
         <div class="row">
             <div class="col-9">
 
-                <p><em>{{ variable.article.category }}</em></p>
+                <p><em>{{ variable.post.category }}</em></p>
 
-                <p>{{ variable.article.content | markdown }}</p>
+                <p>{{ variable.post.content | markdown }}</p>
 
                 <div class="card mb-4 box-shadow">
                     {% if session.auth is not null %}

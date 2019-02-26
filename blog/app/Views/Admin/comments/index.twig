@@ -8,7 +8,6 @@
 
 {% block content %}
 
-
 <h1>Gérer les commentaires</h1>
 
 
@@ -81,4 +80,5 @@
 
     </tbody>
 </table>
+    {{ paginate(variable.comments, current_page) }}
 {% endblock %}

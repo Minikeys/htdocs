@@ -10,7 +10,7 @@ use Pagerfanta\Pagerfanta;
 class PostTable extends Table
 {
 
-    protected $table = 'articles';
+    protected $table = 'posts';
     public $category_id;
 
     /**
@@ -21,11 +21,11 @@ class PostTable extends Table
     public function last(){
 
         return $this->query("
-                  SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
+                  SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
                   
-                  FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
+                  FROM {$this->table} LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
                   
-                  ORDER BY articles.date_update DESC");
+                  ORDER BY posts.date_update DESC");
 
 
     }
@@ -38,11 +38,11 @@ class PostTable extends Table
     public function home(){
 
         return $this->query("
-                  SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
+                  SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
                   
-                  FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
+                  FROM {$this->table} LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
                   
-                  ORDER BY articles.date_update DESC LIMIT 0, 6");
+                  ORDER BY posts.date_update DESC LIMIT 0, 6");
 
 
     }
@@ -56,11 +56,11 @@ class PostTable extends Table
     public function findWithCategory($id){
 
         return $this->query("
-                  SELECT articles.id, articles.title, articles.content, categories.title as category
+                  SELECT posts.id, posts.title, posts.content, posts.extract, categories.title as category
                   
-                  FROM articles LEFT JOIN categories ON category_id = categories.id
+                  FROM {$this->table} LEFT JOIN categories ON category_id = categories.id
                   
-                  WHERE articles.id = ?", [$id], true);
+                  WHERE posts.id = ?", [$id], true);
 
 
     }
@@ -74,13 +74,13 @@ class PostTable extends Table
     public function lastByCategory($category_id){
 
         return $this->query("
-                  SELECT articles.id, articles.title, articles.content, categories.title as category
+                  SELECT posts.id, posts.title, posts.content, posts.extract, categories.title as category
                   
-                  FROM articles LEFT JOIN categories ON category_id = categories.id
+                  FROM {$this->table} LEFT JOIN categories ON category_id = categories.id
                   
-                  WHERE articles.category_id = ?
+                  WHERE posts.category_id = ?
                   
-                  ORDER BY articles.date_update DESC", [$category_id]);
+                  ORDER BY posts.date_update DESC", [$category_id]);
 
 
     }
@@ -101,10 +101,10 @@ class PostTable extends Table
     {
         $query = new PaginatedQuery(
             $this->db,
-            'SELECT articles.id, articles.title, articles.content, articles.date_update, categories.title as category, users.firstname as firstname
-            FROM articles LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id',
-            'ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles',
+            'SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
+            FROM posts LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id',
+            'ORDER BY posts.date_update DESC',
+            'SELECT COUNT(id) AS total FROM posts',
             null
         );
 
@@ -121,10 +121,10 @@ class PostTable extends Table
 
         $query = new PaginatedQuery(
             $this->db,
-            'SELECT articles.id, articles.title, articles.content, categories.title as category 
-            FROM articles LEFT JOIN categories ON category_id = categories.id',
-            'ORDER BY articles.date_update DESC',
-            'SELECT COUNT(id) AS total FROM articles',
+            'SELECT posts.id, posts.title, posts.content, posts.extract, categories.title as category 
+            FROM posts LEFT JOIN categories ON category_id = categories.id',
+            'ORDER BY posts.date_update DESC',
+            'SELECT COUNT(id) AS total FROM posts',
             $this->category_id
         );
 

@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App;
 use Core\HTML\BootstrapForm;
-use function PHPSTORM_META\elementType;
+use Core\Rooter\Rooter;
 
 class CategoriesController extends AppController
 {
@@ -23,9 +23,10 @@ class CategoriesController extends AppController
 
     public function index(){
 
-        $items = $this->Category->all();
+        $paginate = Rooter::get('d', 1);
+        $categories = $this->Category->findPaginated(8, $paginate);
 
-        $this->render('Admin.categories.index', compact('items'));
+        $this->render('Admin.categories.index', compact('categories'));
 
     }
 

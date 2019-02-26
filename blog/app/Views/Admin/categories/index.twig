@@ -49,7 +49,7 @@
     </thead>
     <tbody>
 
-    {% for category in variable.items %}
+    {% for category in variable.categories %}
 
         <tr>
 
@@ -76,5 +76,6 @@
     </tbody>
 
 </table>
+    {{ paginate(variable.categories, current_page) }}
 
 {% endblock %}
