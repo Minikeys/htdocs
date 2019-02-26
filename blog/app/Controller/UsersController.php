@@ -73,9 +73,11 @@ class UsersController extends AppController
                     $this->flashmessage->success('Compte créé avec succès !');
 
                 }
-            }
+            }else{
 
                 $this->flashmessage->error('Username / Email déjà existant');
+
+            }
 
         }
 

@@ -34,6 +34,7 @@ class PostsController extends AppController
             $result = $this->Post->create(
                 ['title' => $_POST['title'],
                     'content' => $_POST['content'],
+                    'extract' => $_POST['extract'],
                     'category_id' => $_POST['category_id'],
                     'author'=> $_SESSION[auth],
                     'date_create'=> date('Y-m-d H:i:s')]);
@@ -63,6 +64,8 @@ class PostsController extends AppController
             $result = $this->Post->update($_GET['id'],
                 ['title' => $_POST['title'],
                     'content' => $_POST['content'],
+                    'extract' => $_POST['extract'],
+                    'author'=> $_POST['author'],
                     'category_id' => $_POST['category_id'],
                     'date_update'=> date('Y-m-d H:i:s')]);
 
@@ -78,11 +81,15 @@ class PostsController extends AppController
 
         $this->loadModel('Category');
 
+        $this->loadModel('User');
+
         $categories = $this->Category->extract('id', 'title');
+
+        $users = $this->User->extract('id', 'username');
 
         $form = new BootstrapForm($post);
 
-        $this->render('Admin.posts.edit', compact('categories', 'form'));
+        $this->render('Admin.posts.edit', compact('categories','users', 'form'));
 
     }
 
