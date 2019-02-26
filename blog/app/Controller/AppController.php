@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use Core\Controller\Controller;
 
+use Core\Rooter\Rooter;
 use Core\Twig\FlashExtensions;
 use Core\Twig\TemplateExtensions;
 use Core\Twig\PagerFantaExtension;
@@ -30,7 +31,7 @@ class AppController extends Controller
 
         $this->loader = new \Twig_Loader_Filesystem($this->viewPath);
 
-        $this->twig = new \Twig_Environment($this->loader, ['debug' => true, 'cache' => ROOT .'/temp']);
+        $this->twig = new \Twig_Environment($this->loader, ['debug' => true]);
 
         $this->twig->addExtension(new TemplateExtensions());
 
@@ -42,9 +43,9 @@ class AppController extends Controller
 
         $this->twig->addExtension(new \Twig_Extensions_Extension_Text());
 
-        $page = $_GET['p'];
+        $page = Rooter::get('p', 'home.index');
 
-        $pagecategory = $_GET['p'].'&id='.$_GET['id'];
+        $pagecategory = $page.'&id='.Rooter::get('id', null);
 
         $this->twig->addGlobal('current_page', $page);
 

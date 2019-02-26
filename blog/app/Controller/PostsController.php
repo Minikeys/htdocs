@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use Core\HTML\BootstrapForm;
+use Core\Rooter\Rooter;
 
 class PostsController extends AppController
 {
@@ -21,17 +22,9 @@ class PostsController extends AppController
 
     public function index(){
 
-        if(isset($_GET['d'])){
+        $paginate = Rooter::get('d', 1);
 
-            $paginpage = $_GET['d'];
-
-        }else{
-
-            $paginpage = '1';
-
-        }
-
-        $posts = $this->Post->findPaginated(4, $paginpage);
+        $posts = $this->Post->findPaginated(4, $paginate);
         $categories = $this->Category->all();
 
         $this->render('Posts.index', compact('posts', 'categories'));
@@ -48,17 +41,9 @@ class PostsController extends AppController
 
         }
 
-        if(isset($_GET['d'])){
+        $paginate = Rooter::get('d', 1);
 
-            $paginpage = $_GET['d'];
-
-        }else{
-
-            $paginpage = '1';
-
-        }
-
-        $articles = $this->Post->lastByCategoryPaginated($_GET['id'], 4, $paginpage);
+        $articles = $this->Post->lastByCategoryPaginated($_GET['id'], 4, $paginate);
 
         $categories = $this->Category->all();
 

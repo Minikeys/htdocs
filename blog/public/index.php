@@ -1,5 +1,7 @@
 <?php
 
+use Core\Rooter\Rooter;
+
 define('ROOT', dirname(__DIR__));
 
 require ROOT . '/app/App.php';
@@ -14,15 +16,7 @@ require ROOT . '/core/Session/SessionInterface.php';
 
 App::load();
 
-if(isset($_GET['p'])){
-
-    $page = $_GET['p'];
-
-}else{
-
-    $page = 'home.index';
-
-}
+$page = Rooter::get('p', 'home.index');
 
 $page = explode('.', $page);
 
