@@ -70,6 +70,7 @@ class PostsController extends AppController
 
     public function edit(){
 
+        if ($_SESSION['auth'] === $_POST['author']){
         if(!empty($_POST)){
 
             $result = $this->Post->update($_GET['id'],
@@ -86,6 +87,12 @@ class PostsController extends AppController
                 header('Location: index.php?p=admin.posts.index');
 
             }
+        }
+        }else{
+
+            $this->flashmessage->error('Vous ne pouvez pas éditer l\'article d\'un autre utilisateur');
+            header('Location: index.php?p=admin.posts.index');
+
         }
 
         $post = $this->Post->find($_GET['id']);
