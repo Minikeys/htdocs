@@ -12,6 +12,7 @@ class PostTable extends Table
 
     protected $table = 'posts';
     public $category_id;
+    protected $iduser;
 
     /**
      * Récupère les derniers articles
@@ -114,14 +115,16 @@ class PostTable extends Table
 
     }
 
-    public function findPaginatedByUser(int $perPage, int $paginPage, int $iduser): Pagerfanta
+    public function findPaginatedByUser(int $perPage, int $paginPage, int $id): Pagerfanta
     {
+
+        $this->iduser = $id;
         $query = new PaginatedQuery(
             $this->db,
             'SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
-            FROM posts LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id WHERE author ='.$iduser,
+            FROM posts LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id WHERE author ='.$this->iduser,
             'ORDER BY posts.date_update DESC',
-            'SELECT COUNT(id) AS total FROM posts WHERE author ='.$iduser,
+            'SELECT COUNT(id) AS total FROM posts WHERE author ='.$this->iduser,
             null
         );
 
