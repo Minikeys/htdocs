@@ -69,4 +69,11 @@ class UserTable extends Table
 
     }
 
+    public function countusers(){
+
+        return $this->query("SELECT COUNT(id) as total FROM {$this->table}");
+
+
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App;
 use Core\HTML\BootstrapForm;
 use Core\Rooter\Rooter;
+use \Core\Auth\DBAuth;
 
 class UsersController extends AppController
 {
@@ -13,6 +14,15 @@ class UsersController extends AppController
     {
 
         parent::__construct();
+
+        $app = App::getInstance();
+
+        $auth = new DBAuth($app->getDb());
+
+        if(is_null($auth->admin())){
+
+            $this->forbidden();
+        }
 
         $this->loadModel('User');
 
@@ -32,7 +42,7 @@ class UsersController extends AppController
         if(!empty($_POST)){
 
             $result = $this->User->update($_POST['id'],
-                ['grade' => '1']);
+                ['grade' => '2']);
 
             if ($result){
 
@@ -49,7 +59,7 @@ class UsersController extends AppController
         if(!empty($_POST)){
 
             $result = $this->User->update($_POST['id'],
-                ['grade' => '0']);
+                ['grade' => '1']);
 
             if ($result){
 

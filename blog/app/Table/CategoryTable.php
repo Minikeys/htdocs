@@ -36,4 +36,12 @@ class CategoryTable extends Table
 
     }
 
+    public function countcategories(){
+
+        return $this->query("SELECT COUNT(id) as total FROM {$this->table}");
+
+
+    }
+
+
 }

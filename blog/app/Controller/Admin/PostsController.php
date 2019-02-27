@@ -22,7 +22,18 @@ class PostsController extends AppController
     public function index(){
 
         $paginate = Rooter::get('d', 1);
-        $posts = $this->Post->findPaginated(8, $paginate);
+
+            if($_SESSION['grade'] == 2){
+
+                $posts = $this->Post->findPaginated(8, $paginate);
+
+            } else {
+
+                $posts = $this->Post->findPaginatedByUser(8, $paginate, $_SESSION['auth']);
+
+            }
+
+
         $this->render('Admin.posts.index', compact('posts'));
 
     }

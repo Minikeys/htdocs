@@ -18,7 +18,7 @@ class AppController extends \App\Controller\AppController
 
         $auth = new DBAuth($app->getDb());
 
-        if(is_null($auth->admin())){
+        if(is_null($auth->logged())){
 
             $this->forbidden();
         }

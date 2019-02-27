@@ -1,0 +1,45 @@
+{% extends '/Templates/default.twig' %}
+
+{% block title %}
+
+    <title>Gérer les articles - {{ nameapp }}</title>
+
+{% endblock %}
+
+{% block content %}
+
+
+<h1>Administration</h1>
+
+    {% if flash('success') %}
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ flash('success') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    {% if flash('error') %}
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{ flash('error') }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endif %}
+
+    <div class="row">
+        {% for count in variable.counts %}
+        <div class="col">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ count.value }}</h5>
+                    <h5 class="card-text">{{ count.name }}</h5>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

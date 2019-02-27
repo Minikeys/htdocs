@@ -3,6 +3,7 @@
 namespace App\Table;
 
 use \App;
+use Core\Database\Database;
 use Core\Table\PaginatedQuery;
 use Core\Table\Table;
 use Pagerfanta\Pagerfanta;
@@ -56,6 +57,13 @@ class CommentTable extends Table
         return (new Pagerfanta($query))
             ->setMaxPerPage($perPage)
             ->setCurrentPage($paginPage);
+
+    }
+
+    public function countcomments(){
+
+        return $this->query("SELECT COUNT(id) as total FROM {$this->table}");
+
 
     }
 

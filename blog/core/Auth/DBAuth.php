@@ -70,13 +70,10 @@ class DBAuth
 
     public function admin(){
 
-        if($_SESSION['grade'] == 1){
+        if($_SESSION['grade'] == 2){
 
             return $_SESSION['grade'];
 
-        }else{
-
-            return null;
         }
 
 

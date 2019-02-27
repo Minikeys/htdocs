@@ -57,7 +57,7 @@
             <td style="width:10%;">{% if user.grade == 1 %} Administrateur {% else %} Utilisateur {% endif %}</td>
             <td style="width:10%;">{% if user.statut == 1 %} Désactivé {% else %} Actif {% endif %}</td>
             <td style="width:30%;">
-                {% if user.grade  == 0 %}
+                {% if user.grade  == 1 %}
                     <form action="?p=admin.users.upgrade" method="post" style="display: inline;">
 
                         <input type="hidden" name="id" value="{{ user.id }}">

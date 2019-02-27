@@ -83,16 +83,18 @@
             </span>
                 {% endif %}
 
-                {% if session.grade == 1 %}
+                {% if session.grade %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Administration
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les articles</a>
+                            {% if session.grade == 2 %}
                             <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les catégories</a>
                             <a class="dropdown-item {{ activeClass('admin.comments.index') }}" href="index.php?p=admin.comments.index">Gérer les commentaires</a>
                             <a class="dropdown-item {{ activeClass('admin.users.index') }}" href="index.php?p=admin.users.index">Gérer les utilisateurs</a>
+                            {% endif %}
                         </div>
                     </li>
 

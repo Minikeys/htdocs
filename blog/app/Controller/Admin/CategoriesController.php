@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App;
 use Core\HTML\BootstrapForm;
 use Core\Rooter\Rooter;
+use \Core\Auth\DBAuth;
 
 class CategoriesController extends AppController
 {
@@ -17,6 +18,15 @@ class CategoriesController extends AppController
         $this->loadModel('Category');
 
         $this->loadModel('Post');
+
+        $app = App::getInstance();
+
+        $auth = new DBAuth($app->getDb());
+
+        if(is_null($auth->admin())){
+
+            $this->forbidden();
+        }
 
     }
 
