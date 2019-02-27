@@ -69,8 +69,25 @@ class PostsController extends AppController
     }
 
     public function edit(){
+        if ($_SESSION['grade'] == 2) {
+            if(!empty($_POST)){
 
-        if ($_SESSION['auth'] === $_POST['author']){
+                $result = $this->Post->update($_GET['id'],
+                    ['title' => $_POST['title'],
+                        'content' => $_POST['content'],
+                        'extract' => $_POST['extract'],
+                        'author'=> $_POST['author'],
+                        'category_id' => $_POST['category_id'],
+                        'date_update'=> date('Y-m-d H:i:s')]);
+
+                if ($result){
+
+                    $this->flashmessage->success('Article édité');
+                    header('Location: index.php?p=admin.posts.index');
+
+                }
+            }
+        }elseif ($_SESSION['auth'] === $_POST['author']){
         if(!empty($_POST)){
 
             $result = $this->Post->update($_GET['id'],
@@ -113,7 +130,7 @@ class PostsController extends AppController
 
     public function delete(){
 
-        if(empty($_POST)) {
+        if(!empty($_POST)) {
 
             if ($_SESSION['grade'] == 2) {
 
