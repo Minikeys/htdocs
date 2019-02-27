@@ -22,9 +22,9 @@ class CommentTable extends Table
 
         return $this->query("
                   
-                  SELECT comments.id, comments.content, users.firstname as firstname, comments.approved
+                  SELECT comments.id, comments.content, comments.name, comments.approved
                   
-                  FROM {$this->table} LEFT JOIN users ON id_user = users.id
+                  FROM {$this->table}
                   
                   WHERE comments.id_article = ? AND comments.approved = 1", [$id], false);
 
@@ -35,9 +35,9 @@ class CommentTable extends Table
 
         return $this->query("
                   
-                  SELECT comments.id, comments.content, users.username as username, comments.approved
+                  SELECT comments.id, comments.content, comments.name, comments.approved
                   
-                  FROM {$this->table} LEFT JOIN users ON id_user = users.id");
+                  FROM {$this->table}");
 
 
     }
@@ -46,8 +46,8 @@ class CommentTable extends Table
     {
         $query = new PaginatedQuery(
             $this->db,
-            'SELECT comments.id, comments.content, users.username as username, comments.approved
-            FROM comments LEFT JOIN users ON id_user = users.id',
+            'SELECT comments.id, comments.content, comments.name, comments.approved
+            FROM comments',
             'ORDER BY comments.date_create DESC',
             'SELECT COUNT(id) AS total FROM comments',
             null

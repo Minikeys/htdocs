@@ -20,7 +20,6 @@
                 <p>{{ variable.post.content | markdown }}</p>
 
                 <div class="card mb-4 box-shadow">
-                    {% if session.auth is not null %}
                     <div class="card-header">
                         Ajouter un commentaire
                     </div>
@@ -43,14 +42,17 @@
                             </div>
                         {% endif %}
                         <form method="post">
-
-                            {{ form.textarea('content', 'Votre commentaire', variable.form.data.content) }}
+                            {% if session.auth is not null %}
+                            {{ form.input('name', 'Votre nom', variable.user, {require: 'readonly'})}}
+                            {% else %}
+                            {{ form.input('name', 'Votre nom', variable.form.data.name, {require: 'required'})}}
+                            {% endif %}
+                            {{ form.textarea('content', 'Votre commentaire', variable.form.data.content, {require: 'required'}) }}
 
                             <button class="btn btn-primary">Envoyer</button>
 
                         </form>
                     </div>
-                    {% endif %}
                     <div class="card-header">
                         Les commentaires
                     </div>
@@ -61,7 +63,7 @@
                                 <li class="list-group-item">
                                     <blockquote class="blockquote">
                                         <p class="mb-0">{{ comment.content }}</p>
-                                        <footer class="blockquote-footer">De {{ comment.firstname }} - Le {{ comment.date_create|date("d/m/Y H:i") }} </footer>
+                                        <footer class="blockquote-footer">De {{ comment.name }} - Le {{ comment.date_create|date("d/m/Y H:i") }} </footer>
                                     </blockquote>
 
                                     </li>

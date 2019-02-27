@@ -56,13 +56,14 @@ class PostsController extends AppController
         $post = $this->Post->findWithCategory($_GET['id']);
         $comments = $this->Comment->show($_GET['id']);
         $categories = $this->Category->all();
+        $user = $_SESSION['firstname'] . ' '. $_SESSION['lastname'];
         $form = new BootstrapForm($_POST);
 
         if(!empty($_POST)){
 
             $result = $this->Comment->create(
                 ['id_article' => $_GET['id'],
-                    'id_user' => $_SESSION[auth],
+                    'name' => $_POST['name'],
                     'content' => $_POST['content']]);
 
             if ($result){
@@ -74,7 +75,7 @@ class PostsController extends AppController
             }
         }
 
-        $this->render('Posts.show', compact('post', 'comments', 'categories','form'));
+        $this->render('Posts.show', compact('post', 'comments', 'categories','form', 'user'));
 
     }
 

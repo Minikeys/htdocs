@@ -36,7 +36,7 @@
 
     <tr>
         <th scope="col">ID</th>
-        <th scope="col">Author</th>
+        <th scope="col">Auteur</th>
         <th scope="col">Commentaire</th>
         <th scope="col">Status</th>
         <th scope="col">Actions</th>
@@ -50,7 +50,7 @@
 
         <tr>
             <td style="width:15%;">{{ comment.id }}</td>
-            <td style="width:20%;">{{ comment.username }}</td>
+            <td style="width:20%;">{{ comment.name }}</td>
             <td style="width:25%;">{{ comment.content }}</td>
             <td style="width:15%;">{% if comment.approved == 1 %} Approuvé le {{ comment.date_approved|date("d/m/Y H:i") }}{% else %} Non approuvé {% endif %}</td>
             <td style="width:25%;">
