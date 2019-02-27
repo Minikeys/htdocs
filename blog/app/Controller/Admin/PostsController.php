@@ -106,19 +106,36 @@ class PostsController extends AppController
 
     public function delete(){
 
-        if(!empty($_POST)){
+        if(empty($_POST)) {
 
-            $result = $this->Post->deletepost($_POST['id']);
+            if ($_SESSION['grade'] == 2) {
 
-            if ($result){
+                $result = $this->Post->deletepost($_POST['id']);
 
-                $this->flashmessage->success('Article supprimé');
-                header('Location: index.php?p=admin.posts.index');
+                if ($result) {
+
+                    $this->flashmessage->success('Article supprimé');
+                    header('Location: index.php?p=admin.posts.index');
+
+                }
+
+            }else{
+
+                if ($_SESSION['auth'] === $_POST['author']){
+
+                    $result = $this->Post->deletepost($_POST['id']);
+
+                    if ($result) {
+
+                        $this->flashmessage->success('Article supprimé');
+                        header('Location: index.php?p=admin.posts.index');
+
+                    }
+
+                }
 
             }
-
         }
-
     }
 
 }

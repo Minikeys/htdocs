@@ -121,7 +121,7 @@ class PostTable extends Table
         $this->iduser = $id;
         $query = new PaginatedQuery(
             $this->db,
-            'SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
+            'SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, posts.author, categories.title as category, users.firstname as firstname
             FROM posts LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id',
             'ORDER BY posts.date_update DESC',
             'SELECT COUNT(id) AS total FROM posts',

@@ -64,6 +64,7 @@
                 <form action="?p=admin.posts.delete" method="post" style="display: inline;">
 
                     <input type="hidden" name="id" value="{{ post.id }}">
+                    <input type="hidden" name="author" value="{{ post.author }}">
 
                     <button type="submit" class="btn btn-danger">Supprimer</button>
 
