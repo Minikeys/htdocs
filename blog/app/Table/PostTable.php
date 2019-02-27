@@ -146,7 +146,8 @@ class PostTable extends Table
             FROM posts LEFT JOIN categories ON category_id = categories.id',
             'ORDER BY posts.date_update DESC',
             'SELECT COUNT(id) AS total FROM posts',
-            $this->category_id
+            true,
+            ['value' => 'author', 'id' => $this->category_id]
         );
 
         return (new Pagerfanta($query))
