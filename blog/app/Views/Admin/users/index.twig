@@ -54,7 +54,7 @@
             <td style="width:5%;">{{ user.id }}</td>
             <td style="width:15%;">{{ user.username }}</td>
             <td style="width:20%;">{{ user.firstname }} {{ user.lastname }}</td>
-            <td style="width:10%;">{% if user.grade == 1 %} Administrateur {% else %} Utilisateur {% endif %}</td>
+            <td style="width:10%;">{% if user.grade == 2 %} Administrateur {% else %} Utilisateur {% endif %}</td>
             <td style="width:10%;">{% if user.statut == 1 %} Désactivé {% else %} Actif {% endif %}</td>
             <td style="width:30%;">
                 {% if user.grade  == 1 %}
