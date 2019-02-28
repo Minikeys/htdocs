@@ -31,11 +31,15 @@ class ContactController extends AppController
             if($send === true){
 
                 $this->flashmessage->success('Votre message a été envoyé !');
+                header('Location: index.php?p=contact');
+                exit;
 
 
             } else {
 
                 $this->flashmessage->error('Erreur : '. $send);
+                header('Location: index.php?p=contact');
+                exit;
 
             }
 
