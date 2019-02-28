@@ -46,6 +46,7 @@ class MailSender
             //Recipients
             $mail->setFrom($this->mail_from['email'], $this->mail_from['name']);
             $mail->addAddress($this->mail_to['email'], $this->mail_to['name']);     // Add a recipient
+            $mail->addReplyTo($email, $firstname .' '. $lastname);
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
