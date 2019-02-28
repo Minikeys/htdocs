@@ -69,8 +69,7 @@ class PostsController extends AppController
     }
 
     public function edit(){
-        if ($_SESSION['grade'] == 2 && !empty($_POST)) {
-
+        if ($_SESSION['grade'] == 2 && !empty($_POST) || $_SESSION['auth'] === $_POST['author'] && !empty($_POST)) {
 
                 $result = $this->Post->update($_GET['id'],
                     ['title' => $_POST['title'],
@@ -86,23 +85,6 @@ class PostsController extends AppController
                     header('Location: index.php?p=admin.posts.index');
 
                 }
-            } elseif ($_SESSION['auth'] === $_POST['author'] && !empty($_POST)){
-
-
-            $result = $this->Post->update($_GET['id'],
-                ['title' => $_POST['title'],
-                    'content' => $_POST['content'],
-                    'extract' => $_POST['extract'],
-                    'author'=> $_POST['author'],
-                    'category_id' => $_POST['category_id'],
-                    'date_update'=> date('Y-m-d H:i:s')]);
-
-            if ($result){
-
-                $this->flashmessage->success('Article édité');
-                header('Location: index.php?p=admin.posts.index');
-
-            }
         }else{
 
             $this->flashmessage->error('Vous ne pouvez pas éditer l\'article d\'un autre utilisateur');
