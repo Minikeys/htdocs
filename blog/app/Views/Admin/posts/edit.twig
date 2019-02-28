@@ -16,7 +16,11 @@
 
     {{ form.select('category_id', 'Catégorie', variable.categories, variable.form.data.category_id)}}
 
+    {% if variable.form.data.author is not null %}
+
     {{ form.select('author', 'Auteur', variable.users, variable.form.data.author)}}
+
+    {%  endif %}
 
     {{ form.textarea('extract', 'Extrait', variable.form.data.extract) }}
 
