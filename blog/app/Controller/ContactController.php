@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use \App;
 
-use Core\Mail\Email;
+use Core\Mail\MailSender;
 
 use Core\HTML\BootstrapForm;
 
@@ -17,16 +17,16 @@ class ContactController extends AppController
     {
         parent::__construct();
 
-        $this->mail = new Email();
-
     }
 
     public function index()
     {
+        $app = App::getInstance();
+        $mail = $app->getMail();
 
         if(!empty($_POST)){
 
-            $send = $this->mail->contact($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['subject'],$_POST['message']);
+            $send = $mail->contact($_POST['firstname'],$_POST['lastname'],$_POST['email'],$_POST['subject'],$_POST['message']);
 
             if($send === true){
 

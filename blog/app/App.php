@@ -2,10 +2,13 @@
 
 use Core\Config;
 use Core\Database\MysqlDatabase;
+use Core\Mail\MailSender;
 
 class App{
 
     private $db_instance;
+
+    private $mail_instance;
 
     private static $_instance;
 
@@ -54,6 +57,20 @@ class App{
         }
 
         return $this->db_instance;
+
+    }
+
+    public function getMail(){
+
+        $config = Config::getInstance(ROOT . '/config/config.php');
+
+        if(is_null($this->mail_instance)){
+
+            $this->mail_instance = new MailSender($config->get('mail_host'), $config->get('mail_username'), $config->get('mail_password'), $config->get('mail_secure'), $config->get('mail_port'));
+            
+        }
+
+        return $this->mail_instance;
 
     }
 
