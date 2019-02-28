@@ -147,7 +147,7 @@ class PostTable extends Table
             'ORDER BY posts.date_update DESC',
             'SELECT COUNT(id) AS total FROM posts',
             true,
-            ['value' => 'author', 'id' => $this->category_id]
+            ['value' => 'category_id', 'id' => $this->category_id]
         );
 
         return (new Pagerfanta($query))
