@@ -35,7 +35,7 @@
         </div>
     {% endif %}
     <h2>Dernières Actualités</h2>
-
+    {% if variable.posts is empty %} <p>Aucun article.</p>{% endif %}
     {% for row in variable.posts | batch(2) %}
         <div class="row">
             {% for post in row %}
