@@ -25,7 +25,7 @@ class PostsController extends AppController
         $paginate = Rooter::get('d', 1);
 
         $posts = $this->Post->findPaginated(6, $paginate);
-        $categories = $this->Category->all();
+        $categories = $this->Category->allWithCount();
 
         $this->render('Posts.index', compact('posts', 'categories'));
 
@@ -45,7 +45,7 @@ class PostsController extends AppController
 
         $posts = $this->Post->lastByCategoryPaginated($_GET['id'], 6, $paginate);
 
-        $categories = $this->Category->all();
+        $categories = $this->Category->allWithCount();
 
         $this->render('Posts.category', compact('posts', 'categories', 'categorie'));
 

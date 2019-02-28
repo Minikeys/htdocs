@@ -34,6 +34,7 @@ class Table
 
     }
 
+
     public function count($value){
 
         return $this->query("SELECT COUNT($value) FROM {$this->table}");

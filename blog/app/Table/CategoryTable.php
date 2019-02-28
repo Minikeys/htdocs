@@ -43,5 +43,11 @@ class CategoryTable extends Table
 
     }
 
+    public function allWithCount(){
+
+        return $this->query("SELECT {$this->table}.*, (SELECT COUNT(*) FROM posts WHERE posts.category_id = {$this->table}.id) AS total FROM {$this->table}");
+
+    }
+
 
 }
