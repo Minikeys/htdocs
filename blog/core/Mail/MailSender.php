@@ -13,14 +13,18 @@ class MailSender
     private $mail_password;
     private $mail_secure;
     private $mail_port;
+    private $mail_from;
+    private $mail_to;
 
-    public function __construct($mail_host, $mail_username, $mail_password, $mail_secure, $mail_port)
+    public function __construct($mail_host, $mail_username, $mail_password, $mail_secure, $mail_port, $mail_from, $mail_to)
     {
         $this->mail_host = $mail_host;
         $this->mail_username = $mail_username;
         $this->mail_password = $mail_password;
         $this->mail_secure = $mail_secure;
         $this->mail_port = $mail_port;
+        $this->mail_from = $mail_from;
+        $this->mail_to = $mail_to;
     }
 
     public function contact($firstname, $lastname, $email, $subject, $message){
@@ -40,14 +44,13 @@ class MailSender
             $mail->Port = $this->mail_port;                                    // TCP port to connect to
 
             //Recipients
-            $mail->setFrom('devcc@gmx.fr', 'Mailer');
-            $mail->addAddress('mikael@mgmail.fr', 'Blog OCC');     // Add a recipient
-            $mail->addReplyTo($email, $firstname . $lastname);
+            $mail->setFrom($this->mail_from['email'], $this->mail_from['name']);
+            $mail->addAddress($this->mail_to['email'], $this->mail_to['name']);     // Add a recipient
 
             //Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = $subject;
-            $mail->Body    = $message;
+            $mail->Body    = "Message de ". $firstname .' '. $lastname . " - Email : ". $email ."</br> Message :</br>".$message;
 
             $mail->send();
 

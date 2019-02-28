@@ -66,8 +66,8 @@ class App{
 
         if(is_null($this->mail_instance)){
 
-            $this->mail_instance = new MailSender($config->get('mail_host'), $config->get('mail_username'), $config->get('mail_password'), $config->get('mail_secure'), $config->get('mail_port'));
-            
+            $this->mail_instance = new MailSender($config->get('mail_host'), $config->get('mail_username'), $config->get('mail_password'), $config->get('mail_secure'), $config->get('mail_port'), $config->get('mail_from'), $config->get('mail_to'));
+
         }
 
         return $this->mail_instance;

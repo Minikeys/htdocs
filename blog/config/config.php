@@ -7,5 +7,7 @@
     "mail_username" => "devcc@gmx.fr",
     "mail_password" => "devcc1234",
     "mail_secure" => "tls",
-    "mail_port" => "587"
+    "mail_port" => "587",
+    "mail_from" => ['email' => 'devcc@gmx.fr', 'name' => 'Blog CyberCreative'],
+    "mail_to" => ['email' => 'mikael@mgmail.fr', 'name' => 'Mikael']
 );
