@@ -3,11 +3,14 @@
 namespace App\Controller\Admin;
 
 use App;
+use Core\Auth\DBAuth;
 use Core\HTML\BootstrapForm;
 use Core\Rooter\Rooter;
 
 class PostsController extends AppController
 {
+
+    protected $checkgrade;
 
     public function __construct()
     {
@@ -15,6 +18,16 @@ class PostsController extends AppController
         parent::__construct();
 
         $this->loadModel('Post');
+
+        $app = App::getInstance();
+
+        $auth = new DBAuth($app->getDb());
+
+        if(is_null($auth->logged())){
+
+            $this->forbidden();
+        }
+
 
     }
 
@@ -69,7 +82,10 @@ class PostsController extends AppController
     }
 
     public function edit(){
-        if ($_SESSION['grade'] == 2 && !empty($_POST) || $_SESSION['auth'] === $_POST['author'] && !empty($_POST)) {
+
+        $this->checkgrade = DBAuth::checkgrade(2);
+
+        if (!empty($_POST)) {
 
                 $result = $this->Post->update($_GET['id'],
                     ['title' => $_POST['title'],
@@ -85,6 +101,24 @@ class PostsController extends AppController
                     header('Location: index.php?p=admin.posts.index');
 
                 }
+        }
+
+        $post = $this->Post->find($_GET['id']);
+
+        if ($this->checkgrade || $_SESSION['auth'] === $post->author){
+
+            $this->loadModel('Category');
+
+            $this->loadModel('User');
+
+            $categories = $this->Category->extract('id', 'title');
+
+            $users = $this->User->extract('id', 'username');
+
+            $form = new BootstrapForm($post);
+
+            $this->render('Admin.posts.edit', compact('categories','users', 'form'));
+
         }else{
 
             $this->flashmessage->error('Vous ne pouvez pas éditer l\'article d\'un autre utilisateur');
@@ -92,25 +126,13 @@ class PostsController extends AppController
 
         }
 
-        $post = $this->Post->find($_GET['id']);
-
-        $this->loadModel('Category');
-
-        $this->loadModel('User');
-
-        $categories = $this->Category->extract('id', 'title');
-
-        $users = $this->User->extract('id', 'username');
-
-        $form = new BootstrapForm($post);
-
-        $this->render('Admin.posts.edit', compact('categories','users', 'form'));
-
     }
 
     public function delete(){
 
-        if(!empty($_POST) && $_SESSION['grade'] == 2) {
+        $this->checkgrade = DBAuth::checkgrade(2);
+
+        if(!empty($_POST && ($this->checkgrade || $_SESSION['auth'] === $post->author))) {
 
                 $result = $this->Post->deletepost($_POST['id']);
 
@@ -121,19 +143,13 @@ class PostsController extends AppController
 
                 }
 
-            }elseif($_SESSION['auth'] === $_POST['author']){
+            }else{
 
-                    $result = $this->Post->deletepost($_POST['id']);
+            $this->flashmessage->error('Vous n\'avez pas les droits pour supprimer cet article.');
+            header('Location: index.php?p=admin.posts.index');
 
-                    if ($result) {
+        }
 
-                        $this->flashmessage->success('Article supprimé');
-                        header('Location: index.php?p=admin.posts.index');
-
-                    }
-
-                }
-
-            }
+    }
 
 }

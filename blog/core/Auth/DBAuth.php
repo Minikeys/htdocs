@@ -76,6 +76,18 @@ class DBAuth
 
         }
 
+    }
+
+    static function checkgrade($grade){
+
+        if($_SESSION['grade'] == $grade){
+
+            return true;
+
+        }else{
+
+            return false;
+        }
 
     }
 
