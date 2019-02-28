@@ -128,9 +128,7 @@ class PostsController extends AppController
 
     public function delete(){
 
-        if(!empty($_POST)) {
-
-            if ($_SESSION['grade'] == 2) {
+        if(!empty($_POST) && $_SESSION['grade'] == 2) {
 
                 $result = $this->Post->deletepost($_POST['id']);
 
@@ -141,9 +139,7 @@ class PostsController extends AppController
 
                 }
 
-            }else{
-
-                if ($_SESSION['auth'] === $_POST['author']){
+            }elseif($_SESSION['auth'] === $_POST['author']){
 
                     $result = $this->Post->deletepost($_POST['id']);
 
@@ -157,7 +153,5 @@ class PostsController extends AppController
                 }
 
             }
-        }
-    }
 
 }
