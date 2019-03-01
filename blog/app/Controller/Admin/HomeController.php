@@ -26,7 +26,7 @@ class HomeController extends AppController
         $countcategories = $this->Category->countcategories();
         $countcomments = $this->Comment->countcomments();
         $countusers = $this->User->countusers();
-        $counts = ['posts'=>['value' => $countposts[0]->total, 'name' => 'articles'], 'categories'=>['value' => $countcategories[0]->total, 'name' => 'catégories'], 'comments'=>['value' => $countcomments[0]->total, 'name' => 'commentaires'], 'users'=>['value' => $countusers[0]->total, 'name' => 'utilisateurs']];
+        $counts = ['posts'=>['value' => $countposts[0]->total, 'name' => 'articles', 'id' => 'posts'], 'categories'=>['value' => $countcategories[0]->total, 'name' => 'catégories', 'id' => 'categories'], 'comments'=>['value' => $countcomments[0]->total, 'name' => 'commentaires', 'id' => 'comments'], 'users'=>['value' => $countusers[0]->total, 'name' => 'utilisateurs', 'id' => 'users']];
         $this->render('Admin.home', compact('counts'));
 
     }

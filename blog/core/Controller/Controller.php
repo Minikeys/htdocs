@@ -25,13 +25,16 @@ class Controller
 
     protected function forbidden(){
 
-        header('Location: index.php?p=home');
+        $this->flashmessage->error('Vous devez être connecté !');
+        header('Location: index.php?p=users.login');
+        exit;
 
     }
 
     protected function notFound(){
-
+        $this->flashmessage->error('La page n\'existe pas ou plus :( ');
         header('Location: index.php?p=home');
+        exit;
     }
 
 }

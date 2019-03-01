@@ -54,6 +54,13 @@ class PostsController extends AppController
     public function show(){
 
         $post = $this->Post->findWithCategory($_GET['id']);
+
+        if($post === false){
+
+            $this->notFound();
+
+        }
+
         $comments = $this->Comment->show($_GET['id']);
         $categories = $this->Category->all();
         $user = $_SESSION['firstname'] . ' '. $_SESSION['lastname'];
