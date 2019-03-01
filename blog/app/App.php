@@ -10,6 +10,8 @@ class App{
 
     private $mail_instance;
 
+    private $app_instance;
+
     private static $_instance;
 
     public static function getInstance(){
@@ -71,6 +73,14 @@ class App{
         }
 
         return $this->mail_instance;
+
+    }
+
+    public function getParam($param){
+
+        $config = Config::getInstance(ROOT . '/config/config.php');
+
+        return $config->get($param);
 
     }
 
