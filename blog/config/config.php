@@ -9,5 +9,7 @@
     "mail_secure" => "tls",
     "mail_port" => "587",
     "mail_from" => ['email' => 'devcc@gmx.fr', 'name' => 'Blog CyberCreative'],
-    "mail_to" => ['email' => 'mikael@mgmail.fr', 'name' => 'Mikael']
+    "mail_to" => ['email' => 'mikael@mgmail.fr', 'name' => 'Mikael'],
+    "name_app" => "CyberCreative",
+    "logo_app" => "./img/logo.png"
 );

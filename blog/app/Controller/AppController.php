@@ -45,15 +45,19 @@ class AppController extends Controller
 
         $page = Rooter::get('p', 'home.index');
 
+        $logo = \App::getInstance()->getParam('logo_app');
+
+        $name = \App::getInstance()->getParam('name_app');
+
         $pagewithid = $page.'&id='.Rooter::get('id', null);
 
         $this->twig->addGlobal('current_page', $page);
 
         $this->twig->addGlobal('current_page_id', $pagewithid);
 
-        $this->twig->addGlobal('nameapp', 'CyberCreative');
+        $this->twig->addGlobal('nameapp', $name);
 
-        $this->twig->addGlobal('logo', './img/logo.png');
+        $this->twig->addGlobal('logo', $logo);
 
         $this->twig->addGlobal('session', $_SESSION);
 
