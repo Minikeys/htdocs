@@ -10,8 +10,6 @@ class App{
 
     private $mail_instance;
 
-    private $app_instance;
-
     private static $_instance;
 
     public static function getInstance(){
