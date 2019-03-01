@@ -7,12 +7,9 @@
 {% endblock %}
 
 {% block content %}
-
-    <div class="row">
-        <div class="col col-xl-10">
-            <h1>Gérer les commentaires</h1>
-        </div>
-        <div class="col col-sm">
+    <div class="d-flex">
+        <div class="mr-auto p-2"><h1>Gérer les commentaires</h1></div>
+        <div class="p-2">
             <div class="btn-group">
                 <a class="btn btn-primary" href="index.php?p=admin.home.index" role="button">Administration</a>
                 <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -29,7 +26,6 @@
             </div>
         </div>
     </div>
-
 
     {% if flash('success') %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">

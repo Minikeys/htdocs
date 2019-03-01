@@ -51,9 +51,13 @@ class PaginatedQuery extends Table implements AdapterInterface
 
             $count = $this->db->query("{$this->countResults}");
 
-        } else {
+        } elseif(is_null($this->filterparam['value2'])){
 
             $count = $this->db->query("{$this->countResults} WHERE {$this->filterparam['value']} = {$this->filterparam['id']}");
+
+        }else{
+
+            $count = $this->db->query("{$this->countResults} WHERE {$this->filterparam['value']} = {$this->filterparam['id']} AND {$this->filterparam['value2']} = {$this->filterparam['id2']}");
 
         }
 
@@ -77,9 +81,16 @@ class PaginatedQuery extends Table implements AdapterInterface
         $this->param2 = intval($length);
 
         if(is_null($this->filter)){
+
             return $this->db->query("{$this->results} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
-        } else {
+
+        } elseif(is_null($this->filterparam['value2'])){
+
             return $this->db->query("{$this->results} WHERE {$this->filterparam['value']} = {$this->filterparam['id']} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
+
+        } else {
+
+            return $this->db->query("{$this->results} WHERE {$this->filterparam['value']} = {$this->filterparam['id']} AND {$this->filterparam['value2']} = {$this->filterparam['id2']} {$this->orderResults} LIMIT {$this->param1}, {$this->param2}");
 
         }
 

@@ -7,28 +7,25 @@
 {% endblock %}
 
 {% block content %}
-
-<div class="row">
-    <div class="col col-xl-10">
-        <h1>Gérer les utilisateurs</h1>
-    </div>
-    <div class="col col-sm">
-        <div class="btn-group">
-            <a class="btn btn-primary" href="index.php?p=admin.home.index" role="button">Administration</a>
-            <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="sr-only">Toggle Dropdown</span>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right">
-                <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les articles</a>
-                {% if session.grade == 2 %}
-                    <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les catégories</a>
-                    <a class="dropdown-item {{ activeClass('admin.comments.index') }}" href="index.php?p=admin.comments.index">Gérer les commentaires</a>
-                    <a class="dropdown-item {{ activeClass('admin.users.index') }}" href="index.php?p=admin.users.index">Gérer les utilisateurs</a>
-                {% endif %}
+    <div class="d-flex">
+        <div class="mr-auto p-2"><h1>Gérer les utilisateurs</h1></div>
+        <div class="p-2">
+            <div class="btn-group">
+                <a class="btn btn-primary" href="index.php?p=admin.home.index" role="button">Administration</a>
+                <button type="button" class="btn btn-primary dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="sr-only">Toggle Dropdown</span>
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item {{ activeClass('admin.posts.index') }}" href="index.php?p=admin.posts.index">Gérer les articles</a>
+                    {% if session.grade == 2 %}
+                        <a class="dropdown-item {{ activeClass('admin.categories.index') }}" href="index.php?p=admin.categories.index">Gérer les catégories</a>
+                        <a class="dropdown-item {{ activeClass('admin.comments.index') }}" href="index.php?p=admin.comments.index">Gérer les commentaires</a>
+                        <a class="dropdown-item {{ activeClass('admin.users.index') }}" href="index.php?p=admin.users.index">Gérer les utilisateurs</a>
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>
-</div>
 
     {% if flash('success') %}
         <div class="alert alert-success alert-dismissible fade show" role="alert">

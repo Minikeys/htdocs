@@ -45,11 +45,11 @@ class AppController extends Controller
 
         $page = Rooter::get('p', 'home.index');
 
-        $pagecategory = $page.'&id='.Rooter::get('id', null);
+        $pagewithid = $page.'&id='.Rooter::get('id', null);
 
         $this->twig->addGlobal('current_page', $page);
 
-        $this->twig->addGlobal('current_category', $pagecategory);
+        $this->twig->addGlobal('current_page_id', $pagewithid);
 
         $this->twig->addGlobal('nameapp', 'CyberCreative');
 
