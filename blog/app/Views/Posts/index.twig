@@ -27,11 +27,10 @@
     {% endif %}
         <h1>Actualités</h1>
         <div class="row">
-
             <div class="col-9">
-                {% if variable.posts is empty %} <p>Aucun article.</p>{% endif %}
-                    {% for row in variable.posts | batch(3) %}
-                <div class="row">
+                    {% if variable.posts is empty %} <p>Aucun article.</p>{% endif %}
+                    {% for row in variable.posts | batch(2) %}
+                        <div class="row">
                             {% for post in row %}
                                 <div class="col-sm mb-3">
                                     <div class="card">
@@ -55,22 +54,21 @@
                                     </div>
                                 </div>
                             {% endfor %}
+                        </div>
+                    {% endfor %}
+
+                    {{ paginate(variable.posts, current_page_id) }}
                 </div>
-                    {% endfor %}
-
-                {{ paginate(variable.posts, current_page) }}
-            </div>
-
-            <div class="col">
-                <ul class="list-group">
-                    {% for category in variable.categories %}
-                        <a href="{{ category.url }}" class="list-group-item list-group-item-action">
-                            {{ category.title }}
-                            <span class="badge badge-primary badge-pill">{{ category.total }}</span>
-                        </a>
-                    {% endfor %}
-                </ul>
-            </div>
+                <div class="col">
+                    <ul class="list-group">
+                        {% for category in variable.categories %}
+                            <a href="{{ category.url }}" class="list-group-item list-group-item-action">
+                                {{ category.title }}
+                                <span class="badge badge-primary badge-pill">{{ category.total }}</span>
+                            </a>
+                        {% endfor %}
+                    </ul>
+                </div>
         </div>
 
 {% endblock %}

@@ -13,6 +13,7 @@ class PostTable extends Table
     protected $table = 'posts';
     public $category_id;
     protected $iduser;
+    public $num_posts_home;
 
     /**
      * Récupère les derniers articles
@@ -38,12 +39,14 @@ class PostTable extends Table
 
     public function home(){
 
+        $this->num_posts_home = \App::getInstance()->getParam('num_posts_home');
+
         return $this->query("
                   SELECT posts.id, posts.title, posts.content, posts.extract, posts.date_update, categories.title as category, users.firstname as firstname
                   
                   FROM {$this->table} LEFT JOIN categories ON category_id = categories.id LEFT JOIN users ON author = users.id
                   
-                  ORDER BY posts.date_update DESC LIMIT 0, 6");
+                  ORDER BY posts.date_update DESC LIMIT 0, {$this->num_posts_home}");
 
 
     }

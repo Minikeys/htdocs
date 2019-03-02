@@ -24,7 +24,9 @@ class PostsController extends AppController
 
         $paginate = Rooter::get('d', 1);
 
-        $posts = $this->Post->findPaginated(6, $paginate);
+        $param = \App::getInstance()->getParam('paginate_posts');
+
+        $posts = $this->Post->findPaginated($param, $paginate);
         $categories = $this->Category->allWithCount();
 
         $this->render('Posts.index', compact('posts', 'categories'));
@@ -35,6 +37,8 @@ class PostsController extends AppController
 
         $categorie = $this->Category->find($_GET['id']);
 
+        $param = \App::getInstance()->getParam('paginate_category');
+
         if($categorie === false){
 
             $this->notFound();
@@ -43,7 +47,7 @@ class PostsController extends AppController
 
         $paginate = Rooter::get('d', 1);
 
-        $posts = $this->Post->lastByCategoryPaginated($_GET['id'], 6, $paginate);
+        $posts = $this->Post->lastByCategoryPaginated($_GET['id'], $param, $paginate);
 
         $categories = $this->Category->allWithCount();
 
