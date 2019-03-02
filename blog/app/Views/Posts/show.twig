@@ -81,7 +81,7 @@
                     {% for category in variable.categories %}
                         <a href="{{ category.url }}" class="list-group-item list-group-item-action">
                         {{ category.title }}
-                        <span class="badge badge-primary badge-pill">{{ category.count }}</span>
+                        <span class="badge badge-primary badge-pill">{{ category.total }}</span>
                         </a>
                     {% endfor %}
                 </ul>

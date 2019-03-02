@@ -67,7 +67,7 @@ class PostsController extends AppController
         $paginate = Rooter::get('d', 1);
 
         $comments = $this->Comment->findPaginatedByID($_GET['id'], 5, $paginate);
-        $categories = $this->Category->all();
+        $categories = $this->Category->allWithCount();
         $user = $_SESSION['firstname'] . ' '. $_SESSION['lastname'];
         $form = new BootstrapForm($_POST);
 
