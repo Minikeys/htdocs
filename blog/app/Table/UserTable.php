@@ -12,33 +12,54 @@ class UserTable extends Table
 
     protected $table = 'users';
 
-    public function findUser($username, $email){
+    public function findUser($id)
+    {
 
         $finduser = $this->query("
-                  SELECT id
+                  SELECT username, firstname, lastname, email
                   
                   FROM {$this->table}
                   
-                  WHERE username = ?", [$username], true);
+                  WHERE id = ?", [$id], true);
 
-        if (!empty($finduser)){
+        if (!empty($finduser)) {
 
             return $finduser;
 
-        } else {
+        }
+    }
 
-            $findemail = $this->query("
+    public function checkUser($username, $email, $id = null){
+
+        if(is_null($id)) {
+
+            $checkUser = $this->query("
                   SELECT id
                   
                   FROM {$this->table}
                   
-                  WHERE email = ?", [$email], true);
+                  WHERE username = ? OR email = ?", [$username, $email], false);
 
-            if (!empty($findemail)){
+            if (!empty($checkUser)) {
 
-                return $findemail;
+                return $checkUser;
 
-        }
+            }
+        }else{
+
+            $checkUser = $this->query("
+                  SELECT id
+                  
+                  FROM {$this->table}
+                  
+                  WHERE id != ? AND (username = ? OR email = ?)", [$id, $username, $email], false);
+
+            if (!empty($checkUser)) {
+
+                return $checkUser;
+
+            }
+
         }
 
     }
