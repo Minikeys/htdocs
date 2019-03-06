@@ -1,0 +1,10 @@
+<IfModule mod_headers.c>
+Header always set X-FRAME-OPTIONS "DENY"
+Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+Header set Content-Security-Policy "script-src 'self' https://use.fontawesome.com/ 'unsafe-inline' 'unsafe-eval'"
+Header set Content-Security-Policy "script-src 'self' https://stackpath.bootstrapcdn.com/ 'unsafe-inline' 'unsafe-eval'"
+Header set Content-Security-Policy "script-src 'self' https://code.jquery.com/ 'unsafe-inline' 'unsafe-eval'"
+Header set Content-Security-Policy "script-src-elem 'self' https://cdnjs.cloudflare.com/; base-uri 'self';"
+Header always set X-Content-Type-Options "nosniff"
+Header always set X-XSS-Protection "1; mode=block"
+</IfModule>
