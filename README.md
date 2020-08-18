@@ -1,4 +1,4 @@
-# Blog-OCR [not maintained]
+# Blog-OCR - not maintained
 
 Copy all files in your web server.
 
